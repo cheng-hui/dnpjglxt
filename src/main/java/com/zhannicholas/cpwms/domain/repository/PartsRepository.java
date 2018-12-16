@@ -1,11 +1,16 @@
 package com.zhannicholas.cpwms.domain.repository;
 
 import com.zhannicholas.cpwms.domain.model.Parts;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface PartsRepository extends JpaRepository<Parts, Integer> {
+
+    Page<Parts> findAll(Pageable pageable);
+
     /**
      * 根据 partsId 查找电脑配件
      * @param partsId   电脑配件id

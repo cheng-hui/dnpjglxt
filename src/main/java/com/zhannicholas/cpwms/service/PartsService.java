@@ -1,11 +1,13 @@
 package com.zhannicholas.cpwms.service;
 
 import com.zhannicholas.cpwms.domain.model.Parts;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface PartsService {
-    List<Parts> findAll();
+    Page<Parts> findAll(Pageable pageable);
     void save(Parts parts);
     Parts findOne(int partsId);
     List<Parts> findByPartsName(String partsName);

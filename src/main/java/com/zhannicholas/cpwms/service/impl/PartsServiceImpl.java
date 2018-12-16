@@ -4,6 +4,8 @@ import com.zhannicholas.cpwms.domain.model.Parts;
 import com.zhannicholas.cpwms.domain.repository.PartsRepository;
 import com.zhannicholas.cpwms.service.PartsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +22,8 @@ public class PartsServiceImpl implements PartsService {
     }
 
     @Override
-    public List<Parts> findAll() {
-        return partsRepository.findAll();
+    public Page<Parts> findAll(Pageable pageable) {
+        return partsRepository.findAll(pageable);
     }
 
     @Override

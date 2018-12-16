@@ -14,7 +14,7 @@ public class Parts {
     private double partsValue;
     private List<RecordIn> recordInList;
     private List<RecordOut> recordOutList;
-    private List<RecordStorage> recordStorages;
+    private List<Storage> storageList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,12 +103,12 @@ public class Parts {
     }
 
     @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
-    public List<RecordStorage> getRecordStorages() {
-        return recordStorages;
+    public List<Storage> getStorageList() {
+        return storageList;
     }
 
-    public void setRecordStorages(List<RecordStorage> recordStorages) {
-        this.recordStorages = recordStorages;
+    public void setStorageList(List<Storage> storageList) {
+        this.storageList = storageList;
     }
 
     @Override

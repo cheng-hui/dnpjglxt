@@ -95,7 +95,7 @@ public class RepoAdmin {
     }
 
     @OneToOne
-    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID")
+    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID", insertable = false, updatable = false)
     public Respository getRepository() {
         return repository;
     }

@@ -1,6 +1,7 @@
 package com.zhannicholas.cpwms.domain.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class Respository {
     private String repoArea;
     private String repoDesc;
     private RepoAdmin repoAdmin;
+    private List<Storage> storageList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,5 +101,14 @@ public class Respository {
 
     public void setRepoAdmin(RepoAdmin repoAdmin) {
         this.repoAdmin = repoAdmin;
+    }
+
+    @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
+    public List<Storage> getStorageList() {
+        return storageList;
+    }
+
+    public void setStorageList(List<Storage> storages) {
+        this.storageList = storages;
     }
 }
