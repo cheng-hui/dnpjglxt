@@ -12,6 +12,16 @@ public class RecordStorage {
     private int recordNumber;
     private Parts parts;
 
+    @Override
+    public String toString() {
+        return "RecordStorage{" +
+                "recordPartsid=" + recordPartsid +
+                ", recordRepository=" + recordRepository +
+                ", recordNumber=" + recordNumber +
+                ", parts=" + parts +
+                '}';
+    }
+
     @Id
     @Column(name = "RECORD_PARTSID", nullable = false)
     public int getRecordPartsid() {

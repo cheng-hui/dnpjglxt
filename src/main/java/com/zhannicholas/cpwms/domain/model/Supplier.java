@@ -7,6 +7,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "cpims_supplier", schema = "dbo", catalog = "cpims_db")
 public class Supplier {
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "supplierId=" + supplierId +
+                ", supplierName='" + supplierName + '\'' +
+                ", supplierPerson='" + supplierPerson + '\'' +
+                ", supplierTel='" + supplierTel + '\'' +
+                ", supplierEmail='" + supplierEmail + '\'' +
+                ", supplierAddress='" + supplierAddress + '\'';
+    }
+
     private int supplierId;
     private String supplierName;
     private String supplierPerson;
@@ -16,6 +27,7 @@ public class Supplier {
     private List<RecordIn> recordIns;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SUPPLIER_ID", nullable = false)
     public int getSupplierId() {
         return supplierId;
@@ -93,7 +105,7 @@ public class Supplier {
         return Objects.hash(supplierId, supplierName, supplierPerson, supplierTel, supplierEmail, supplierAddress);
     }
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     public List<RecordIn> getRecordIns() {
         return recordIns;
     }

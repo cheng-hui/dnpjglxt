@@ -16,6 +16,7 @@ public class RepoAdmin {
     private Respository repository;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REPO_ADMIN_ID", nullable = false)
     public int getRepoAdminId() {
         return repoAdminId;
@@ -101,5 +102,28 @@ public class RepoAdmin {
 
     public void setRepository(Respository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public String toString() {
+        return "RepoAdmin{" +
+                "repoAdminId=" + repoAdminId +
+                ", repoAdminName='" + repoAdminName + '\'' +
+                ", repoAdminSex='" + repoAdminSex + '\'' +
+                ", repoAdminTel='" + repoAdminTel + '\'' +
+                ", repoAdminAddress='" + repoAdminAddress + '\'' +
+                ", repoAdminBirth=" + repoAdminBirth +
+                ", repository=" + repository +
+                '}';
+    }
+
+    @OneToOne
+    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID")
+    public Respository getRepositoty() {
+        return repository;
+    }
+
+    public void setRepositoty(Respository repositoty) {
+        this.repository = repositoty;
     }
 }

@@ -10,12 +10,14 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
+     * 根据 id 查找用户
      * @param id 用户id
      * @return 和 id 对应的 user
      */
     User findById(int id);
 
     /**
+     * 根据用户名查找用户
      * @param username 用户名
      * @return 和 username 对应的用户
      */

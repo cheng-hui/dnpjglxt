@@ -11,8 +11,10 @@ public class Respository {
     private String repoStatus;
     private String repoArea;
     private String repoDesc;
+    private RepoAdmin repoAdmin;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REPO_ID", nullable = false)
     public int getRepoId() {
         return repoId;
@@ -77,5 +79,25 @@ public class Respository {
     @Override
     public int hashCode() {
         return Objects.hash(repoId, repoAddress, repoStatus, repoArea, repoDesc);
+    }
+
+    @Override
+    public String toString() {
+        return "Respository{" +
+                "repoId=" + repoId +
+                ", repoAddress='" + repoAddress + '\'' +
+                ", repoStatus='" + repoStatus + '\'' +
+                ", repoArea='" + repoArea + '\'' +
+                ", repoDesc='" + repoDesc + '\'' +
+                '}';
+    }
+
+    @OneToOne(mappedBy = "repositoty", cascade = CascadeType.ALL)
+    public RepoAdmin getRepoAdmin() {
+        return repoAdmin;
+    }
+
+    public void setRepoAdmin(RepoAdmin repoAdmin) {
+        this.repoAdmin = repoAdmin;
     }
 }

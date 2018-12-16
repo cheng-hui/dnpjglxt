@@ -16,6 +16,7 @@ public class RecordIn {
     private Respository repository;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RECORD_ID", nullable = false)
     public int getRecordId() {
         return recordId;
@@ -99,5 +100,18 @@ public class RecordIn {
 
     public void setRepository(Respository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public String toString() {
+        return "RecordIn{" +
+                "recordId=" + recordId +
+                ", recordNumber=" + recordNumber +
+                ", recordTime=" + recordTime +
+                ", recordPerson='" + recordPerson + '\'' +
+                ", supplier=" + supplier +
+                ", parts=" + parts +
+                ", repository=" + repository +
+                '}';
     }
 }

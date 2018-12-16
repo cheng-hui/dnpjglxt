@@ -16,6 +16,7 @@ public class Customer {
     private List<RecordOut> recordOutList;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID", nullable = false)
     public int getCustomerId() {
         return customerId;
@@ -93,12 +94,24 @@ public class Customer {
         return Objects.hash(customerId, customerName, customerPerson, customerTel, customerEmail, customerAddress);
     }
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public List<RecordOut> getRecordOutList() {
         return recordOutList;
     }
 
     public void setRecordOutList(List<RecordOut> recordOutList) {
         this.recordOutList = recordOutList;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
+                ", customerPerson='" + customerPerson + '\'' +
+                ", customerTel='" + customerTel + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                '}';
     }
 }

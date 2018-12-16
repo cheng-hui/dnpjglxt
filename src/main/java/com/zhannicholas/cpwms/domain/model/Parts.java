@@ -17,6 +17,7 @@ public class Parts {
     private List<RecordStorage> recordStorages;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PARTS_ID", nullable = false)
     public int getPartsId() {
         return partsId;
@@ -83,7 +84,7 @@ public class Parts {
         return Objects.hash(partsId, partsName, partsType, partsSize, partsValue);
     }
 
-    @OneToMany(mappedBy = "parts")
+    @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
     public List<RecordIn> getRecordInList() {
         return recordInList;
     }
@@ -92,7 +93,7 @@ public class Parts {
         this.recordInList = recordInList;
     }
 
-    @OneToMany(mappedBy = "parts")
+    @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
     public List<RecordOut> getRecordOutList() {
         return recordOutList;
     }
@@ -101,12 +102,23 @@ public class Parts {
         this.recordOutList = recordOutList;
     }
 
-    @OneToMany(mappedBy = "parts")
+    @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
     public List<RecordStorage> getRecordStorages() {
         return recordStorages;
     }
 
     public void setRecordStorages(List<RecordStorage> recordStorages) {
         this.recordStorages = recordStorages;
+    }
+
+    @Override
+    public String toString() {
+        return "Parts{" +
+                "partsId=" + partsId +
+                ", partsName='" + partsName + '\'' +
+                ", partsType='" + partsType + '\'' +
+                ", partsSize='" + partsSize + '\'' +
+                ", partsValue=" + partsValue +
+                '}';
     }
 }
