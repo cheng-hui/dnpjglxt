@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登陆</title>
+<title>登录</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -48,21 +48,6 @@
 										placeholder="密码" name="password">
 								</div>
 							</div>
-
-							<div class="form-group">
-								<label class="control-label col-md-4 col-sm-4"> <!-- <span class="glyphicon glyphicon-lock"></span> -->
-									验证码：
-								</label>
-								<div class="col-md-5 col-sm-4">
-									<input type="text" id="checkCode" class="form-control"
-										placeholder="验证码" name="checkCode">
-								</div>
-								<div>
-									<img id="checkCodeImg" alt="checkCodeImg"
-										src="account/checkCode/1">
-								</div>
-							</div>
-
 							<div>
 								<div class="col-md-4 col-sm-4"></div>
 								<div class="col-md-4 col-sm-4">
@@ -92,24 +77,14 @@
 	<script>
 		$(function() {
 			validatorInit();
-			refreshCheckCode();
 		});
 
-		// 刷新图形验证码
-		function refreshCheckCode() {
-			$('#checkCodeImg').click(function() {
-				var timestamp = new Date().getTime();
-				//被AccountHandler类拦截
-				$(this).attr("src", "account/checkCode/" + timestamp)
-			})
-		}
 
 		// 登陆信息加密模块
-		function infoEncrypt(userID, password, checkCode) {
+		function infoEncrypt(userID, password) {
 			var str1 = $.md5(password);
 			var str2 = $.md5(str1 + userID);
-			var str3 = $.md5(str2 + checkCode.toUpperCase());
-			return str3;
+			return str2;
 		}
 		//bootstrapValidator插件对表单进行封装，表单不用加action
 		function validatorInit() {
@@ -139,13 +114,6 @@
 							},
 							callback : {}
 						}
-					},
-					checkCode : {
-						validators : {
-							notEmpty : {
-								message : '验证码不能为空'
-							}
-						}
 					}
 				}
 			})
@@ -161,19 +129,18 @@
 				// 发送数据到后端 进行验证
 				var userID = $('#userID').val();
 				var password = $('#password').val();
-				var checkCode = $('#checkCode').val();
 
 				// 加密
-				password = infoEncrypt(userID, password, checkCode)
+				password = infoEncrypt(userID, password)
 
 				var data = {
 					"id" : userID,
-					"password" : password,
-				}
+					"password" : password
+				};
 				//JSON.stringify(data)序列化
 				$.ajax({
 					type:"POST",
-					url:"account/login",
+					url:"account/signIn",
 					dataType:"json",
 					contentType:"application/json",
 					data:JSON.stringify(data),
@@ -188,8 +155,8 @@
 								errorMessage = "用户名错误";
 								field = "userID";
 							}
-							else if(response.msg == "incorrectCredentials"){
-								errorMessage = "密码或验证码错误";
+							else if(response.msg == "incorrectPassword"){
+								errorMessage = "密码错误";
 								field = "password";
 								$('#password').val("");
 							}else{
@@ -202,9 +169,6 @@
 							bv.updateMessage(field,'callback',errorMessage);
 							bv.updateStatus(field,'INVALID','callback');
 							bv.updateStatus("checkCode",'INVALID','callback');
-							//更新验证码
-							$('#checkCodeImg').attr("src","account/checkCode/" + new Date().getTime());
-							$('#checkCode').val("");
 						}else{
 							// 页面跳转
 							window.location.href = "/mainPage";

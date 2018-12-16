@@ -31,7 +31,7 @@ public class UserServiceImplTest {
 
     @Test
     public void findOne() {
-        System.out.println(userService.findOne(1001));
+        System.out.println(userService.findOne(100111));
     }
 
     @Test
