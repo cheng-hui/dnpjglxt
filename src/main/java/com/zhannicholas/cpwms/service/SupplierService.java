@@ -1,13 +1,14 @@
 package com.zhannicholas.cpwms.service;
 
 import com.zhannicholas.cpwms.domain.model.Supplier;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.Map;
 
 public interface SupplierService {
-    List<Supplier> findAll();
-    void save(Supplier supplier);
-    Supplier findOne(int supplierId);
-    Supplier findBySupplierName(String supplierName);
-    void delete(int supplierId);
+    Map<String, Object> findAll(Pageable pageable);
+    boolean save(Supplier supplier);
+    Map<String, Object> findOne(int supplierId);
+    Map<String, Object> findBySupplierNameContaining(String supplierName, Pageable pageable);
+    boolean delete(int supplierId);
 }

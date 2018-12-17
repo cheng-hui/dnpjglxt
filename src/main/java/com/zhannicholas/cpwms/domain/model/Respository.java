@@ -1,5 +1,7 @@
 package com.zhannicholas.cpwms.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -91,9 +93,11 @@ public class Respository {
                 ", repoStatus='" + repoStatus + '\'' +
                 ", repoArea='" + repoArea + '\'' +
                 ", repoDesc='" + repoDesc + '\'' +
+                ", repoAdmin=" + repoAdmin +
                 '}';
     }
 
+    @JsonIgnore
     @OneToOne(mappedBy = "repositoty", cascade = CascadeType.ALL)
     public RepoAdmin getRepoAdmin() {
         return repoAdmin;
@@ -103,6 +107,7 @@ public class Respository {
         this.repoAdmin = repoAdmin;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
     public List<Storage> getStorageList() {
         return storageList;

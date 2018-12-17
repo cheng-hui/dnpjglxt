@@ -1,10 +1,10 @@
-package com.zhannicholas.cpwms.web;
+package com.zhannicholas.cpwms.web.controller;
 
 import com.zhannicholas.cpwms.domain.model.Parts;
 import com.zhannicholas.cpwms.service.PartsService;
-import com.zhannicholas.cpwms.util.Response;
+import com.zhannicholas.cpwms.util.Constants;
+import com.zhannicholas.cpwms.util.ToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.zhannicholas.cpwms.util.Constants.*;
+
 @Controller
 @RequestMapping("/partsManage")
 public class PartsController {
-    private static final String SEARCH_BY_ID = "searchByID";
-    private static final String SEARCH_BY_NAME = "searchByName";
-    private static final String SEARCH_ALL = "searchAll";
-
     private final PartsService partsService;
 
     @Autowired
@@ -62,7 +60,7 @@ public class PartsController {
 //        *******************************************************************************************
 //        注意：bootstrap table 中 offset 的计算方式为：pageSize * (pageNumber - 1);而 pageSize = limit;
 //        *******************************************************************************************
-        return query(searchType, offset == 0 ? 0 : offset / limit + 1, limit, keyWord);
+        return query(searchType, offset < limit ? 0 : offset / limit, limit, keyWord);
     }
 
     /**
@@ -75,10 +73,8 @@ public class PartsController {
     public Map<String, Object> updateParts(@RequestBody Parts parts){
         System.out.println(parts);
 
-        String result =partsService.save(parts) ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
-        Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("result", result);
-        return resultSet;
+        String result =partsService.save(parts) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        return ToMapUtil.fromString(result);
     }
 
     /**
@@ -90,9 +86,7 @@ public class PartsController {
     @ResponseBody
     public Map<String, Object> deleteParts(@PathVariable("partsId") int partsId){
         System.out.println(partsId);
-        String result =partsService.delete(partsId) ? Response.RESPONSE_RESULT_SUCCESS : Response.RESPONSE_RESULT_ERROR;
-        Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("result", result);
-        return resultSet;
+        String result =partsService.delete(partsId) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        return ToMapUtil.fromString(result);
     }
 }

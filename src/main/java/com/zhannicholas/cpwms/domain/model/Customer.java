@@ -1,5 +1,7 @@
 package com.zhannicholas.cpwms.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -94,6 +96,7 @@ public class Customer {
         return Objects.hash(customerId, customerName, customerPerson, customerTel, customerEmail, customerAddress);
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public List<RecordOut> getRecordOutList() {
         return recordOutList;

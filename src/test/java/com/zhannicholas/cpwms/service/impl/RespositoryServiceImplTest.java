@@ -18,7 +18,7 @@ public class RespositoryServiceImplTest {
 
     @Test
     public void findAll() {
-        System.out.println(respositoryService.findAll());
+        //System.out.println(respositoryService.findAll());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class RespositoryServiceImplTest {
         respository.setRepoStatus("可用");
         respository.setRepoArea("5000平米");
         respository.setRepoDesc("大容量，交通不太方便");
-        respositoryService.save(respository);
+        //respositoryService.save(respository);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class RespositoryServiceImplTest {
 
     @Test
     public void findByRepoAddress() {
-        System.out.println(respositoryService.findByRepoAddress("花溪"));
+        //System.out.println(respositoryService.findByRepoAddress("花溪"));
     }
 
     @Test

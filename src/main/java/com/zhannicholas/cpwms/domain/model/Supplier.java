@@ -1,5 +1,7 @@
 package com.zhannicholas.cpwms.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -105,6 +107,7 @@ public class Supplier {
         return Objects.hash(supplierId, supplierName, supplierPerson, supplierTel, supplierEmail, supplierAddress);
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     public List<RecordIn> getRecordIns() {
         return recordIns;

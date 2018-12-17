@@ -1,4 +1,4 @@
-package com.zhannicholas.cpwms.web;
+package com.zhannicholas.cpwms.web.controller;
 
 import com.zhannicholas.cpwms.domain.model.User;
 import com.zhannicholas.cpwms.service.UserService;

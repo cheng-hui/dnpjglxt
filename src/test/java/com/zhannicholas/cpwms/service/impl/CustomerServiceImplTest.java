@@ -18,7 +18,7 @@ public class CustomerServiceImplTest {
 
     @Test
     public void findAll() {
-        System.out.println(customerService.findAll());
+        //System.out.println(customerService.findAll());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class CustomerServiceImplTest {
 
     @Test
     public void findByCustomerName() {
-        System.out.println(customerService.findByCustomerName("有限公司"));
+        //System.out.println(customerService.findByCustomerName("有限公司"));
     }
 
     @Test

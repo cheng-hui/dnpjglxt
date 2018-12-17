@@ -3,15 +3,13 @@ package com.zhannicholas.cpwms.service.impl;
 import com.zhannicholas.cpwms.domain.model.Parts;
 import com.zhannicholas.cpwms.domain.repository.PartsRepository;
 import com.zhannicholas.cpwms.service.PartsService;
+import com.zhannicholas.cpwms.util.ToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,13 +26,7 @@ public class PartsServiceImpl implements PartsService {
     @Override
     public Map<String, Object> findAll(Pageable pageable) {
         Page<Parts> partsPage = partsRepository.findAll(pageable);
-        List<Parts> partsList = partsPage.getContent();
-
-        // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("rows", partsList);
-        resultSet.put("total", partsPage.getTotalElements());
-        return resultSet;
+        return ToMapUtil.fromAPage(partsPage);
     }
 
     @Override
@@ -49,28 +41,13 @@ public class PartsServiceImpl implements PartsService {
     @Override
     public Map<String, Object> findOne(int partsId) {
         Parts parts =  partsRepository.findByPartsId(partsId);
-        List<Parts> partsList = new ArrayList<>();
-        partsList.add(parts);
-
-        // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("rows", partsList);
-        resultSet.put("total", 1);
-        return resultSet;
+        return ToMapUtil.fromAInstance(parts);
     }
 
     @Override
     public Map<String, Object> findByPartsNameContaining(String partsName, Pageable pageable) {
         Page<Parts> partsPage = partsRepository.findByPartsNameContaining(partsName, pageable);
-        List<Parts> partsList = partsPage.getContent();
-
-        System.out.println(partsList);
-
-        // 初始化结果集
-        Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("rows", partsList);
-        resultSet.put("total", partsPage.getTotalElements());
-        return resultSet;
+        return ToMapUtil.fromAPage(partsPage);
     }
 
     @Override

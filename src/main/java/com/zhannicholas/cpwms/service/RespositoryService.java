@@ -1,13 +1,14 @@
 package com.zhannicholas.cpwms.service;
 
-import com.zhannicholas.cpwms.domain.model.Respository;
+import com.zhannicholas.cpwms.web.vo.RepoVo;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.Map;
 
 public interface RespositoryService {
-    List<Respository> findAll();
-    void save(Respository respository);
-    Respository findOne(int repoId);
-    List<Respository> findByRepoAddress(String repoAddress);
-    void delete(int repoId);
+    Map<String, Object> findAll(Pageable pageable);
+    boolean save(RepoVo repoVo);
+    Map<String, Object> findOne(int repoId);
+    Map<String, Object> findByRepoAddressContaining(String repoAddress, Pageable pageable);
+    boolean delete(int repoId);
 }

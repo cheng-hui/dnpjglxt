@@ -1,4 +1,4 @@
-package com.zhannicholas.cpwms.web;
+package com.zhannicholas.cpwms.web.controller;
 
 import com.zhannicholas.cpwms.util.AccountStatus;
 import org.springframework.stereotype.Controller;

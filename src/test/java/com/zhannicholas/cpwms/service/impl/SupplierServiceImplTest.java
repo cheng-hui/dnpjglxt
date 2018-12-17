@@ -6,7 +6,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
+
 
 import static org.junit.Assert.*;
 
@@ -19,7 +22,8 @@ public class SupplierServiceImplTest {
 
     @Test
     public void findAll() {
-        System.out.println(supplierService.findAll());
+        Pageable pageable = PageRequest.of(0, 5);
+        System.out.println(supplierService.findAll(pageable));
     }
 
     @Test
@@ -40,7 +44,7 @@ public class SupplierServiceImplTest {
 
     @Test
     public void findBySupplierName() {
-        System.out.println(supplierService.findBySupplierName("Intel"));
+        //System.out.println(supplierService.findBySupplierName("Intel"));
     }
 
     @Test

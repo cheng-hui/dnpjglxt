@@ -113,7 +113,7 @@ public class RepoAdmin {
                 ", repoAdminTel='" + repoAdminTel + '\'' +
                 ", repoAdminAddress='" + repoAdminAddress + '\'' +
                 ", repoAdminBirth=" + repoAdminBirth +
-                ", repository=" + repository +
+                /*", repository=" + repository +*/
                 '}';
     }
 
