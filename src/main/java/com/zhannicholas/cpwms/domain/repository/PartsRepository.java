@@ -9,6 +9,11 @@ import java.util.List;
 
 public interface PartsRepository extends JpaRepository<Parts, Integer> {
 
+    /**
+     * 根据分页参数查找所有电脑配件
+     * @param pageable  分页参数
+     * @return  和 pageable 对应的所有电脑配件
+     */
     Page<Parts> findAll(Pageable pageable);
 
     /**
@@ -19,16 +24,10 @@ public interface PartsRepository extends JpaRepository<Parts, Integer> {
     Parts findByPartsId(int partsId);
 
     /**
-     * 根据 partsName 查找电脑配件---精确查询
-     * @param partsName 电脑配件名
-     * @return  和 partsName 匹配的所有电脑配件
-     */
-    List<Parts> findAllByPartsName(String partsName);
-
-    /**
      * 根据 partsName 查找电脑配件---模糊查询
      * @param partsName 电脑配件名
+     * @param pageable 分页参数
      * @return  和 partsName 匹配的所有电脑配件
      */
-    List<Parts> findByPartsNameContaining(String partsName);
+    Page<Parts> findByPartsNameContaining(String partsName, Pageable pageable);
 }

@@ -57,7 +57,7 @@ public class RecordInServiceImplTest {
         recordIn.setRecordPerson("詹伟伟");
         recordIn.setRecordTime(DateUtil.fromUtilDate());
         recordIn.setSupplier(supplierService.findBySupplierName("小米"));
-        recordIn.setParts(partsService.findByPartsName("小米8").get(0));
+        //recordIn.setParts(partsService.findByPartsName("小米8").get(0));
         recordIn.setRepository(respositoryService.findOne(1006));
 
         recordInService.save(recordIn);

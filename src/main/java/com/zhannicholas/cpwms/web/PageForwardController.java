@@ -17,11 +17,13 @@ public class PageForwardController {
 
     @RequestMapping("mainPage")
     public String showMainPage(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        if(session.getAttribute("userID") != null &&
-            session.getAttribute("account_status").equals(AccountStatus.SIGN_IN)){
-            return "mainPage";
-        }
-        return "login";
+        return "mainPage";
+        // 为了方便测试，先注释登录代码
+//        HttpSession session = request.getSession();
+//        if(session.getAttribute("userID") != null &&
+//            session.getAttribute("account_status").equals(AccountStatus.SIGN_IN)){
+//            return "mainPage";
+//        }
+//        return "login";
     }
 }

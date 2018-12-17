@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <head>
     <!--//{pageContext.request.contextPath}作用是取出部署应用程序的名字-->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>仓库管理系统</title>
+    <title>电脑配件库存管理系统</title>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
         <div class="container-fluid">
             <!-- 导航栏标题 -->
             <div class="navbar-header">
-                <a href="javascript:void(0)" class="navbar-brand home">仓库管理系统</a>
+                <a href="javascript:void(0)" class="navbar-brand home">电脑配件库存管理系统</a>
             </div>
 
             <!-- 导航栏下拉菜单；用户信息与注销登陆 -->
@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
-                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:${sessionScope.userName}</span>
+                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:${sessionScope.username}</span>
                             <!--小三角-->
                             <span class="caret"></span>
                         </a>
@@ -115,11 +115,11 @@ pageEncoding="UTF-8"%>
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id="" class="menu_item"
-                                       name="pagecomponent/stock-inManagement.jsp">货物入库</a>
+                                       name="pagecomponent/stock-inManagement.jsp">配件入库</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id="" class="menu_item"
-                                       name="pagecomponent/stock-outManagement.jsp">货物出库</a>
+                                       name="pagecomponent/stock-outManagement.jsp">配件出库</a>
                                 </li>
                             </ul>
                         </div>
@@ -171,7 +171,7 @@ pageEncoding="UTF-8"%>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id="" class="menu_item"
-                                       name="pagecomponent/goodsManagement.jsp">货物信息管理</a>
+                                       name="pagecomponent/partsManagement.jsp">配件信息管理</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id="" class="menu_item"

@@ -64,7 +64,7 @@ public class AccountController {
             // 获取 session
             HttpSession session = request.getSession();
             session.setAttribute("userID", loginUser.getId());
-            session.setAttribute("userName", loginUser.getUsername());
+            session.setAttribute("username", user.getUsername());
             session.setAttribute("account_status", AccountStatus.SIGN_IN);
             result = Response.RESPONSE_RESULT_SUCCESS;
         }

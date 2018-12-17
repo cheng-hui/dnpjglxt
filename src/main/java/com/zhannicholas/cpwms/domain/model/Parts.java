@@ -1,5 +1,7 @@
 package com.zhannicholas.cpwms.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -85,6 +87,7 @@ public class Parts {
     }
 
     @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<RecordIn> getRecordInList() {
         return recordInList;
     }
@@ -94,6 +97,7 @@ public class Parts {
     }
 
     @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<RecordOut> getRecordOutList() {
         return recordOutList;
     }
@@ -103,6 +107,7 @@ public class Parts {
     }
 
     @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<Storage> getStorageList() {
         return storageList;
     }
