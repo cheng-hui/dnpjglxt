@@ -48,7 +48,7 @@ public class RepoController {
 
     @RequestMapping(value = "getRepositoryList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findAllParts(@RequestParam("searchType") String searchType,
+    public Map<String, Object> findAllRepo(@RequestParam("searchType") String searchType,
                                             @RequestParam(value = "offset", defaultValue = "0") int offset,
                                             @RequestParam(value = "limit", defaultValue = "5") int limit,
                                             @RequestParam("keyWord") String keyWord){
@@ -69,7 +69,7 @@ public class RepoController {
      */
     @RequestMapping(value = "updateRepository", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updateParts(@RequestBody Respository respository){
+    public Map<String, Object> updateRepo(@RequestBody Respository respository){
 
         String result =respositoryService.save(respository) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
@@ -82,9 +82,20 @@ public class RepoController {
      */
     @RequestMapping(value = "deleteRepository/{repoId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> deleteParts(@PathVariable("repoId") int repoId){
+    public Map<String, Object> deleteRepo(@PathVariable("repoId") int repoId){
         System.out.println("删除：" + repoId);
         String result =respositoryService.delete(repoId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
+    }
+
+    /**
+     * 查询所有未指派管理管理员的仓库
+     * @return  返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
+     */
+    @RequestMapping(value = "getUnassignRepository", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getUnassignedRepository(){
+        System.out.println(respositoryService.findAllUnassignedRepo());
+        return respositoryService.findAllUnassignedRepo();
     }
 }

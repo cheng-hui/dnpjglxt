@@ -93,7 +93,6 @@ public class Respository {
                 ", repoStatus='" + repoStatus + '\'' +
                 ", repoArea='" + repoArea + '\'' +
                 ", repoDesc='" + repoDesc + '\'' +
-                ", repoAdmin=" + repoAdmin +
                 '}';
     }
 

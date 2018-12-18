@@ -4,6 +4,7 @@ import com.zhannicholas.cpwms.domain.model.Respository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -29,4 +30,12 @@ public interface RepoRepository extends JpaRepository<Respository, Integer> {
      * @return  和 pageable 对应的所有仓库
      */
     Page<Respository> findAll(Pageable pageable);
+
+    /**
+     * 查询未被分配的仓库
+     * @return  未被分配的仓库列表
+     */
+    @Query(value = "select * from cpims_respository r where r.REPO_ID not in(select ra.REPO_ADMIN_REPOID from cpims_repo_admin ra where ra.REPO_ADMIN_REPOID = r.REPO_ID)", nativeQuery = true)
+    List<Respository> findUnassignedRepo();
+
 }

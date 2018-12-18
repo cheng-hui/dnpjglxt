@@ -27,4 +27,9 @@ public class RepoRepositoryTest {
         }
     }
 
+    @Test
+    public void findAllUnassigned(){
+        System.out.println(repoRepository.findUnassignedRepo());
+    }
+
 }

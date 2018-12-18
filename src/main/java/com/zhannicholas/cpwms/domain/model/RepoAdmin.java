@@ -95,7 +95,7 @@ public class RepoAdmin {
     }
 
     @OneToOne
-    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID")
     public Respository getRepository() {
         return repository;
     }
@@ -113,7 +113,7 @@ public class RepoAdmin {
                 ", repoAdminTel='" + repoAdminTel + '\'' +
                 ", repoAdminAddress='" + repoAdminAddress + '\'' +
                 ", repoAdminBirth=" + repoAdminBirth +
-                /*", repository=" + repository +*/
+                ", repository=" + repository +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ public class RepoAdminVo {
     private String repoAdminTel;
     private String repoAdminAddress;
     private Date repoAdminBirth;
-    private int repoId;
+    private Integer repoId;
 
     public int getRepoAdminId() {
         return repoAdminId;
@@ -60,11 +60,11 @@ public class RepoAdminVo {
         this.repoAdminBirth = repoAdminBirth;
     }
 
-    public int getRepoId() {
+    public Integer getRepoId() {
         return repoId;
     }
 
-    public void setRepoId(int repoId) {
+    public void setRepoId(Integer repoId) {
         this.repoId = repoId;
     }
 }

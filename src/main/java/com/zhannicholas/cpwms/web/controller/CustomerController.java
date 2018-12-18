@@ -48,7 +48,7 @@ public class CustomerController {
 
     @RequestMapping(value = "getCustomerList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findAllParts(@RequestParam("searchType") String searchType,
+    public Map<String, Object> findAllCustomer(@RequestParam("searchType") String searchType,
                                             @RequestParam(value = "offset", defaultValue = "0") int offset,
                                             @RequestParam(value = "limit", defaultValue = "5") int limit,
                                             @RequestParam("keyWord") String keyWord){
@@ -69,7 +69,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "updateCustomer", method = RequestMethod.POST)
     @ResponseBody   /** 必须得返回json格式的数据，因为前端要的就是json数据 */
-    public Map<String, Object> updateParts(@RequestBody Customer customer){
+    public Map<String, Object> updateCustomer(@RequestBody Customer customer){
 
         String result =customerService.save(customer) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
@@ -82,7 +82,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "deleteCustomer/{customerId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> deleteParts(@PathVariable("customerId") int supplierId){
+    public Map<String, Object> deleteCustomer(@PathVariable("customerId") int supplierId){
         System.out.println("删除：" + supplierId);
         String result =customerService.delete(supplierId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);

@@ -74,6 +74,17 @@ public class RespositoryServiceImpl implements RespositoryService {
         return false;
     }
 
+    @Override
+    public Map<String, Object> findAllUnassignedRepo() {
+        List<Respository> respositoryList = repoRepository.findUnassignedRepo();
+        return ToMapUtil.fromAList(respositoryList);
+    }
+
+    @Override
+    public Respository findById(int repoId) {
+        return repoRepository.findByRepoId(repoId);
+    }
+
     /**
      * 检查仓库信息是否满足要求
      * @param repo  仓库

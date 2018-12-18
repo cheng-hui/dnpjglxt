@@ -36,11 +36,21 @@ public class ToMapUtil {
      */
     public static <E> Map<String, Object> fromAPage(Page<E> ePage){
         List<E> eList = ePage.getContent();
+        return fromAList(eList);
+    }
 
+
+    /**
+     * 将一个列表的所有元素转为Map, 用于前端显示
+     * @param eList
+     * @param <E>
+     * @return
+     */
+    public static <E> Map<String, Object> fromAList(List<E> eList){
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
         resultSet.put("rows", eList);
-        resultSet.put("total", ePage.getTotalElements());
+        resultSet.put("total", eList.size());
         return resultSet;
     }
 

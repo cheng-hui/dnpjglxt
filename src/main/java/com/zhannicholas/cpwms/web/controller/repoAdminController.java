@@ -3,10 +3,13 @@ package com.zhannicholas.cpwms.web.controller;
 import com.zhannicholas.cpwms.domain.model.RepoAdmin;
 import com.zhannicholas.cpwms.domain.model.User;
 import com.zhannicholas.cpwms.service.RepoAdminService;
+import com.zhannicholas.cpwms.service.RespositoryService;
 import com.zhannicholas.cpwms.service.UserService;
 import com.zhannicholas.cpwms.util.Constants;
 import com.zhannicholas.cpwms.util.EncryptUtil;
 import com.zhannicholas.cpwms.util.ToMapUtil;
+import com.zhannicholas.cpwms.web.vo.RepoAdminVo;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.util.Map;
 
 import static com.zhannicholas.cpwms.util.Constants.*;
@@ -22,12 +26,14 @@ import static com.zhannicholas.cpwms.util.Constants.*;
 @RequestMapping("/repositoryAdminManage")
 public class repoAdminController {
     private final RepoAdminService repoAdminService;
+    private final RespositoryService respositoryService;
     private final UserService userService;
 
     @Autowired
-    public repoAdminController(RepoAdminService repoAdminService, UserService userService) {
+    public repoAdminController(RepoAdminService repoAdminService, UserService userService, RespositoryService respositoryService) {
         this.repoAdminService = repoAdminService;
         this.userService = userService;
+        this.respositoryService = respositoryService;
     }
 
     /**
@@ -72,13 +78,22 @@ public class repoAdminController {
 
     /**
      *  更新仓库管理员信息
-     * @param repoAdmin 修改后的仓库管理员
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @RequestMapping(value = "updateRepositoryAdmin", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updateRepoAdmin(@RequestBody RepoAdmin repoAdmin){
+    public Map<String, Object> updateRepoAdmin(@RequestBody RepoAdminVo repoAdminVo){
+        RepoAdmin repoAdmin = new RepoAdmin();
+        repoAdmin.setRepoAdminId(repoAdminVo.getRepoAdminId());
+        repoAdmin.setRepoAdminName(repoAdminVo.getRepoAdminName());
+        repoAdmin.setRepoAdminSex(repoAdminVo.getRepoAdminSex());
+        repoAdmin.setRepoAdminTel(repoAdminVo.getRepoAdminTel());
+        repoAdmin.setRepoAdminAddress(repoAdminVo.getRepoAdminAddress());
+        repoAdmin.setRepoAdminBirth(repoAdminVo.getRepoAdminBirth());
+        repoAdmin.setRepository(respositoryService.findById(repoAdminVo.getRepoId()));
+
         System.out.println(repoAdmin);
+
         String result =repoAdminService.save(repoAdmin) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
@@ -91,7 +106,9 @@ public class repoAdminController {
     @RequestMapping(value = "insertRepositoryAdmin", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> insertRepoAdmin(@RequestBody RepoAdmin repoAdmin){
+
         System.out.println(repoAdmin);
+
         String result =repoAdminService.save(repoAdmin) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         if(result.equals(RESULT_ERROR)){
             return ToMapUtil.fromString(result);

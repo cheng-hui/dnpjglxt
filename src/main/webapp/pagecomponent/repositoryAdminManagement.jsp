@@ -156,8 +156,8 @@
 		$('#repositoryAdmin_repoID_edit').text("");
 		
 		// 加载未分配仓库信息
-		if(row.repositoryBelongID != null){
-			$('#repositoryAdmin_repoID_edit').append("<option value='" + row.repositoryBelongID + "'>" + row.repositoryBelongID + "</option>");
+		if(row.repoId != null){
+			$('#repositoryAdmin_repoID_edit').append("<option value='" + row.repoId + "'>" + row.repoId + "</option>");
 		}
 			$('#repositoryAdmin_repoID_edit').append("<option value=''>不指派</option>");
 		
@@ -166,12 +166,12 @@
 			type : 'GET',
 			url : 'repositoryManage/getUnassignRepository',
 			dataType : 'json',
-			contentTypr : 'application/json',
+			contentType : 'application/json',
 			success : function(response){
-				data = response.data;
+				data = response.rows;
 				unassignRepoCache = data;
 				$.each(data,function(index,element){
-					$('#repositoryAdmin_repoID_edit').append("<option value='" + element.id + "'>" + element.id + "</option>");
+					$('#repositoryAdmin_repoID_edit').append("<option value='" + element.repoId + "'>" + element.repoId + "</option>");
 				})
 			}
 		});
@@ -288,10 +288,10 @@
 			var repositoryID = $(this).val();
 			$('#repositoryInfo').removeClass('hide').addClass('hide');
 			$.each(unassignRepoCache,function(index,element){
-				if(element.id == repositoryID){
-					$('#repository_address').text(element.repoAdminAddress);
-					$('#repository_area').text(element.area);
-					$('#repository_status').text(element.status);
+				if(element.repoId == repositoryID){
+					$('#repository_address').text(element.repoAddress);
+					$('#repository_area').text(element.repoArea);
+					$('#repository_status').text(element.repoStatus);
 					$('#repositoryInfo').removeClass('hide');
 				}
 			})
@@ -356,7 +356,6 @@
 				contentType : "application/json",
 				data : JSON.stringify(data),
 				success : function(response) {
-				    alert(response.result);
 					$('#add_modal').modal("hide");
 					var msg;
 					var type;
@@ -660,7 +659,7 @@
 							</div>
 							<div class="form-group">
 								<label for="BirthDate" class="control-label col-md-5 col-sm-5"> 
-									<span>出生日期:</span>
+									<span>出生日期:</span>
 								</label>
 								<div class="col-md-7 col-sm-7">
 									<input class="form_date form-control" value="" id="repositoryAdmin_birth_edit" name="repositoryAdmin_birth" placeholder="出生日期">

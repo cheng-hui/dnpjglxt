@@ -11,4 +11,6 @@ public interface RespositoryService {
     Map<String, Object> findOne(int repoId);
     Map<String, Object> findByRepoAddressContaining(String repoAddress, Pageable pageable);
     boolean delete(int repoId);
+    Map<String, Object> findAllUnassignedRepo();
+    Respository findById(int repoId);
 }
