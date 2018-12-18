@@ -45,9 +45,9 @@ public class RespositoryServiceImpl implements RespositoryService {
     }
 
     @Override
-    public boolean save(RepoVo repoVo) {
-        if(isValidRepo(repoVo)){
-            repoRepository.save(repoVo2Repo(repoVo));
+    public boolean save(Respository respository) {
+        if(isValidRepo(respository)){
+            repoRepository.save(respository);
             return true;
         }
         return false;
@@ -89,11 +89,11 @@ public class RespositoryServiceImpl implements RespositoryService {
     }
 
     /**
-     * 检查仓库视图信息信息是否满足要求
+     * 检查仓库视图信息是否满足要求
      * @param repoVo  仓库
      * @return  若仓库视图信息满足要求则返回true，否则返回false
      */
-    private boolean isValidRepo(RepoVo repoVo){
+    private boolean isValidRepoVo(RepoVo repoVo){
         if(repoVo != null){
             return repoVo.getRepoAddress() != null &&
                     repoVo.getRepoStatus() != null &&
@@ -125,7 +125,7 @@ public class RespositoryServiceImpl implements RespositoryService {
         repoVo.setRepoStatus(repo.getRepoStatus());
         repoVo.setRepoDesc(repo.getRepoDesc());
         RepoAdmin repoAdmin = repo.getRepoAdmin();
-        repoVo.setRepoStatus(repoAdmin != null ? repo.getRepoAdmin().getRepoAdminName() : null);
+        repoVo.setRepoAdminName(repoAdmin != null ? repo.getRepoAdmin().getRepoAdminName() : null);
         return repoVo;
     }
 

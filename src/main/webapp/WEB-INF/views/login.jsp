@@ -83,8 +83,7 @@
 		// 登陆信息加密模块
 		function infoEncrypt(userID, password) {
 			var str1 = $.md5(password);
-			var str2 = $.md5(str1 + userID);
-			return str2;
+            return $.md5(str1 + userID);
 		}
 		//bootstrapValidator插件对表单进行封装，表单不用加action
 		function validatorInit() {

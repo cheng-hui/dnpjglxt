@@ -367,7 +367,7 @@
 				<div>
 					<div class="col-md-3 col-sm-4">
 						<input id="search_input" type="text" class="form-control"
-							placeholder="供应商ID">
+							placeholder="供应商信息查询">
 					</div>
 					<div class="col-md-2 col-sm-3">
 						<button id="search_button" class="btn btn-success">

@@ -98,7 +98,7 @@ public class Respository {
     }
 
     @JsonIgnore
-    @OneToOne(mappedBy = "repositoty", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "repository", cascade = CascadeType.ALL)
     public RepoAdmin getRepoAdmin() {
         return repoAdmin;
     }

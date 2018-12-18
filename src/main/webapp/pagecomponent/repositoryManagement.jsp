@@ -64,7 +64,7 @@
 										title : '仓库地址'
 									},
 									{
-										field : 'repoAdmin',
+										field : 'repoAdminName',
 										title : '仓库管理员'
 									},
 									{
@@ -94,12 +94,12 @@
 											// 操作列中编辑按钮的动作
 											'click .edit' : function(e, value,
 													row, index) {
-												selectID = row.id;
+												selectID = row.repoId;
 												rowEditOperation(row);
 											},
 											'click .delete' : function(e,
 													value, row, index) {
-												selectID = row.id;
+												selectID = row.repoId;
 												$('#deleteWarning_modal')
 														.modal('show');
 											}
@@ -140,10 +140,10 @@
 
 		// load info
 		$('#repository_form_edit').bootstrapValidator("resetForm", true);
-		$('#repository_address_edit').val(row.address);
-		$('#repository_status_edit').val(row.status);
-		$('#repository_area_edit').val(row.area);
-		$('#repository_desc_edit').val(row.desc);
+		$('#repository_address_edit').val(row.repoAddress);
+		$('#repository_status_edit').val(row.repoStatus);
+		$('#repository_area_edit').val(row.repoArea);
+		$('#repository_desc_edit').val(row.repoDesc);
 	}
 
 	// 添加仓库模态框数据校验
@@ -194,11 +194,11 @@
 					}
 
 					var data = {
-						id : selectID,
-						address : $('#repository_address_edit').val(),
-						status : $('#repository_status_edit').val(),
-						area : $('#repository_area_edit').val(),
-						desc : $('#repository_desc_edit').val(),
+						repoId : selectID,
+						repoAddress : $('#repository_address_edit').val(),
+						repoStatus : $('#repository_status_edit').val(),
+						repoArea : $('#repository_area_edit').val(),
+						repoDesc : $('#repository_desc_edit').val(),
 					}
 
 					// ajax
@@ -237,8 +237,8 @@
 
 			// ajax
 			$.ajax({
-				type : "GET",
-				url : "repositoryManage/deleteRepository",
+				type : "POST",
+				url : "repositoryManage/deleteRepository/" + selectID,
 				dataType : "json",
 				contentType : "application/json",
 				data : data,
@@ -272,15 +272,15 @@
 
 		$('#add_modal_submit').click(function() {
 			var data = {
-				address : $('#repository_address').val(),
-				status : $('#repository_status').val(),
-				area : $('#repository_area').val(),
-				desc : $('#repository_desc').val(),
+				repoAddress : $('#repository_address_insert').val(),
+				repoStatus : $('#repository_status_insert').val(),
+				repoArea : $('#repository_area_insert').val(),
+				repoDesc : $('#repository_desc_insert').val(),
 			}
 			// ajax
 			$.ajax({
 				type : "POST",
-				url : "repositoryManage/addRepository",
+				url : "repositoryManage/updateRepository",
 				dataType : "json",
 				contentType : "application/json",
 				data : JSON.stringify(data),
@@ -299,10 +299,10 @@
 					tableRefresh();
 
 					// reset
-					$('#repository_address').val("");
-					$('#repository_ststus').val("");
-					$('#repository_area').val("");
-					$('#repository_desc').val("");
+					$('#repository_address_insert').val("");
+					$('#repository_ststus_insert').val("");
+					$('#repository_area_insert').val("");
+					$('#repository_desc_insert').val("");
 					$('#repository_form').bootstrapValidator("resetForm", true);
 				},
 				error : function(response) {
@@ -364,12 +364,6 @@
 				<button class="btn btn-sm btn-default" id="add_repository">
 					<span class="glyphicon glyphicon-plus"></span> <span>添加仓库信息</span>
 				</button>
-				<button class="btn btn-sm btn-default" id="import_repository">
-					<span class="glyphicon glyphicon-import"></span> <span>导入</span>
-				</button>
-				<button class="btn btn-sm btn-default" id="export_repository">
-					<span class="glyphicon glyphicon-export"></span> <span>导出</span>
-				</button>
 			</div>
 			<div class="col-md-5"></div>
 		</div>
@@ -404,7 +398,7 @@
 								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库地址：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="repository_address"
+									<input type="text" class="form-control" id="repository_address_insert"
 										name="repository_address" placeholder="仓库地址">
 								</div>
 							</div>
@@ -412,7 +406,7 @@
 								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库面积：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="repository_area"
+									<input type="text" class="form-control" id="repository_area_insert"
 										name="repository_area" placeholder="仓库面积">
 								</div>
 							</div>
@@ -420,7 +414,7 @@
 								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库状态：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<input type="text" class="form-control" id="repository_status"
+									<input type="text" class="form-control" id="repository_status_insert"
 										name="repository_status" placeholder="仓库状态">
 								</div>
 							</div>
@@ -428,7 +422,7 @@
 								<label for="" class="control-label col-md-4 col-sm-4"> <span>仓库描述：</span>
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<textarea class="form-control" id="repository_desc"
+									<textarea class="form-control" id="repository_desc_insert"
 										name="repository_desc" placeholder="仓库描述" style="min-width: 100%"></textarea>
 								</div>
 							</div>
@@ -509,7 +503,7 @@
 					</div>
 					<div class="col-md-8 col-sm-8">
 						<h3>是否确认删除该条仓库信息</h3>
-						<p>(注意：若该仓库已经有出入库记录或仓存信息，则该仓库信息将不能删除成功。如需删除该仓库的信息，请保证该仓库没有出入库和仓存信息关联)</p>
+						<p>(注意：若该仓库已经有出入库记录或库存信息，则和该仓库有关的所有出入库信息和库存信息也将被一并删除！)</p>
 					</div>
 				</div>
 			</div>

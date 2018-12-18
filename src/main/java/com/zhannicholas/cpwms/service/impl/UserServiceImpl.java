@@ -25,8 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        userRepository.saveAndFlush(user);
+    public boolean save(User user) {
+        if (isValidUser(user)) {
+            userRepository.saveAndFlush(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -40,7 +44,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int userId) {
-        userRepository.delete(findOne(userId));
+    public boolean delete(int userId) {
+        if(isValidUserId(userId)) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidUser(User user){
+        if(user != null){
+            return user.getUsername() != null &&
+                    user.getPassword() != null;
+        }
+        return false;
+    }
+
+    private boolean isValidUserId(int userId){
+        return userRepository.findById(userId) != null;
     }
 }

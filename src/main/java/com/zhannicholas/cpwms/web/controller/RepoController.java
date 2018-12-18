@@ -4,7 +4,6 @@ import com.zhannicholas.cpwms.domain.model.Respository;
 import com.zhannicholas.cpwms.service.RespositoryService;
 import com.zhannicholas.cpwms.util.Constants;
 import com.zhannicholas.cpwms.util.ToMapUtil;
-import com.zhannicholas.cpwms.web.vo.RepoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +39,7 @@ public class RepoController {
                 return respositoryService.findOne(Integer.parseInt(keyWord));
             case SEARCH_ALL:
                 return respositoryService.findAll(pageable);
-            case SEARCH_BY_NAME:
+            case SEARCH_BY_ADDRESS:
                 return respositoryService.findByRepoAddressContaining(keyWord, pageable);
             default:
                 return respositoryService.findAll(pageable);
@@ -65,14 +64,14 @@ public class RepoController {
 
     /**
      *  更新或者插入仓库信息
-     * @param repoVo 修改后的仓库或者新的仓库
+     * @param respository 修改后的仓库或者新的仓库
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
     @RequestMapping(value = "updateRepository", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updateParts(@RequestBody RepoVo repoVo){
+    public Map<String, Object> updateParts(@RequestBody Respository respository){
 
-        String result =respositoryService.save(repoVo) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =respositoryService.save(respository) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 
@@ -81,11 +80,11 @@ public class RepoController {
      * @param repoId   仓库Id
      * @return  返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "deleteCustomer/{repoId}", method = RequestMethod.POST)
+    @RequestMapping(value = "deleteRepository/{repoId}", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> deleteParts(@PathVariable("repoId") int repoId){
         System.out.println("删除：" + repoId);
-        String result =respositoryService.delete(repoId) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =respositoryService.delete(repoId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 }

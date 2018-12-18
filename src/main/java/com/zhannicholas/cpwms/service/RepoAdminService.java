@@ -1,13 +1,15 @@
 package com.zhannicholas.cpwms.service;
 
 import com.zhannicholas.cpwms.domain.model.RepoAdmin;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.Map;
 
 public interface RepoAdminService {
-    List<RepoAdmin> findAll();
-    void save(RepoAdmin repoAdmin);
-    RepoAdmin findOne(int repoAdminId);
-    RepoAdmin findByRepoAdminName(String repoAdminname);
-    void delete(int repoAdminId);
+    Map<String, Object> findAll(Pageable pageable);
+    boolean save(RepoAdmin repoAdmin);
+    Map<String, Object> findByRepoAdminId(int repoAdminId);
+    Map<String, Object> findByRepoId(int repoId);
+    Map<String, Object> findByRepoAdminNameContaining(String repoAdminname, Pageable pageable);
+    boolean delete(int repoAdminId);
 }

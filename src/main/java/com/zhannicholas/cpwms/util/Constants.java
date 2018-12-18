@@ -7,10 +7,12 @@ public class Constants {
     public static final String SEARCH_BY_ID = "searchByID";
     public static final String SEARCH_BY_NAME = "searchByName";
     public static final String SEARCH_ALL = "searchAll";
+    public static final String SEARCH_BY_ADDRESS = "searchByAddress";
+    public static final String SEARCH_BY_REPOSITORY = "searchByRepositoryID";
 
     // 返回信息相关
-    public static final String RESPONSE_RESULT_SUCCESS = "success";
-    public static final String RESPONSE_RESULT_ERROR = "error";
+    public static final String RESULT_SUCCESS = "success";
+    public static final String RESULT_ERROR = "error";
 
     // response 中可能使用的值
     private static final String RESPONSE_RESULT = "result";

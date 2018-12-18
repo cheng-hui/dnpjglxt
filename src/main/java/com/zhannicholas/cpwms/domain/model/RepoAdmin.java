@@ -116,14 +116,4 @@ public class RepoAdmin {
                 /*", repository=" + repository +*/
                 '}';
     }
-
-    @OneToOne
-    @JoinColumn(name = "REPO_ADMIN_REPOID", referencedColumnName = "REPO_ID")
-    public Respository getRepositoty() {
-        return repository;
-    }
-
-    public void setRepositoty(Respository repositoty) {
-        this.repository = repositoty;
-    }
 }

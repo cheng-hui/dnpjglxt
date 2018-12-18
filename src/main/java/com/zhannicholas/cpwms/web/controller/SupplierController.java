@@ -72,7 +72,7 @@ public class SupplierController {
     @ResponseBody   /** 必须得返回json格式的数据，因为前端要的就是json数据 */
     public Map<String, Object> updateParts(@RequestBody Supplier supplier){
 
-        String result =supplierService.save(supplier) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =supplierService.save(supplier) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 
@@ -85,7 +85,7 @@ public class SupplierController {
     @ResponseBody
     public Map<String, Object> deleteParts(@PathVariable("supplierId") int supplierId){
         System.out.println("删除：" + supplierId);
-        String result =supplierService.delete(supplierId) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =supplierService.delete(supplierId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.zhannicholas.cpwms.util.Constants.*;
@@ -73,7 +72,7 @@ public class PartsController {
     public Map<String, Object> updateParts(@RequestBody Parts parts){
         System.out.println(parts);
 
-        String result =partsService.save(parts) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =partsService.save(parts) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 
@@ -86,7 +85,7 @@ public class PartsController {
     @ResponseBody
     public Map<String, Object> deleteParts(@PathVariable("partsId") int partsId){
         System.out.println(partsId);
-        String result =partsService.delete(partsId) ? Constants.RESPONSE_RESULT_SUCCESS : Constants.RESPONSE_RESULT_ERROR;
+        String result =partsService.delete(partsId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 }

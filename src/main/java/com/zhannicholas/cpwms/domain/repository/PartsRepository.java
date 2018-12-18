@@ -4,6 +4,7 @@ import com.zhannicholas.cpwms.domain.model.Parts;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 
 public interface PartsRepository extends JpaRepository<Parts, Integer> {
