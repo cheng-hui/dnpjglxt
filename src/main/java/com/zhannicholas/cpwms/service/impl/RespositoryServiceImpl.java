@@ -102,7 +102,7 @@ public class RespositoryServiceImpl implements RespositoryService {
      * @param repo  仓库
      * @return  若仓库信息满足要求则返回true，否则返回false
      */
-    private boolean isValidRepo(Respository repo){
+    public boolean isValidRepo(Respository repo){
         if(repo != null){
             return repo.getRepoStatus() != null &&
                     repo.getRepoArea() != null &&
@@ -131,7 +131,7 @@ public class RespositoryServiceImpl implements RespositoryService {
      * @param repoId    仓库id
      * @return  若仓库id合法则返回true,否则返回false
      */
-    private boolean isValidRepoId(int repoId){
+    public boolean isValidRepoId(int repoId){
         return repoRepository.findByRepoId(repoId) != null;
     }
 

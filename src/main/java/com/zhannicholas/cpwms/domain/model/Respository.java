@@ -15,7 +15,6 @@ public class Respository {
     private String repoArea;
     private String repoDesc;
     private RepoAdmin repoAdmin;
-    private List<Storage> storageList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,15 +103,5 @@ public class Respository {
 
     public void setRepoAdmin(RepoAdmin repoAdmin) {
         this.repoAdmin = repoAdmin;
-    }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "parts", cascade = CascadeType.ALL)
-    public List<Storage> getStorageList() {
-        return storageList;
-    }
-
-    public void setStorageList(List<Storage> storages) {
-        this.storageList = storages;
     }
 }

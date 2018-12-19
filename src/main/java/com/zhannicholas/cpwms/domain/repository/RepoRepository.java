@@ -41,7 +41,7 @@ public interface RepoRepository extends JpaRepository<Respository, Integer> {
      * 查询未被分配的仓库
      * @return  未被分配的仓库列表
      */
-    @Query(value = "select * from cpims_respository r where r.REPO_ID not in(select ra.REPO_ADMIN_REPOID from cpims_repo_admin ra where ra.REPO_ADMIN_REPOID = r.REPO_ID)", nativeQuery = true)
+    @Query(value = "SELECT * FROM cpims_respository r WHERE r.REPO_ID NOT IN(SELECT ra.REPO_ADMIN_REPOID FROM cpims_repo_admin ra WHERE ra.REPO_ADMIN_REPOID = r.REPO_ID)", nativeQuery = true)
     List<Respository> findUnassignedRepo();
 
 }

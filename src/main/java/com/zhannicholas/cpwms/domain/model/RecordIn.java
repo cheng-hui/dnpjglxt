@@ -7,10 +7,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "cpims_record_in", schema = "dbo", catalog = "cpims_db")
 public class RecordIn {
-    private int recordId;
-    private int recordNumber;
-    private Date recordTime;
-    private String recordPerson;
+    private int id;
+    private int number;
+    private Date time;
+    private String person;
     private Supplier supplier;
     private Parts parts;
     private Respository repository;
@@ -18,42 +18,42 @@ public class RecordIn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RECORD_ID", nullable = false)
-    public int getRecordId() {
-        return recordId;
+    public int getId() {
+        return id;
     }
 
-    public void setRecordId(int recordId) {
-        this.recordId = recordId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
     @Column(name = "RECORD_NUMBER", nullable = false)
-    public int getRecordNumber() {
-        return recordNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setRecordNumber(int recordNumber) {
-        this.recordNumber = recordNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     @Basic
     @Column(name = "RECORD_TIME", nullable = false)
-    public Date getRecordTime() {
-        return recordTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setRecordTime(Date recordTime) {
-        this.recordTime = recordTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     @Basic
     @Column(name = "RECORD_PERSON", nullable = false, length = 10)
-    public String getRecordPerson() {
-        return recordPerson;
+    public String getPerson() {
+        return person;
     }
 
-    public void setRecordPerson(String recordPerson) {
-        this.recordPerson = recordPerson;
+    public void setPerson(String person) {
+        this.person = person;
     }
 
     @Override
@@ -61,15 +61,15 @@ public class RecordIn {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecordIn recordIn = (RecordIn) o;
-        return recordId == recordIn.recordId &&
-                recordNumber == recordIn.recordNumber &&
-                Objects.equals(recordTime, recordIn.recordTime) &&
-                Objects.equals(recordPerson, recordIn.recordPerson);
+        return id == recordIn.id &&
+                number == recordIn.number &&
+                Objects.equals(time, recordIn.time) &&
+                Objects.equals(person, recordIn.person);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recordId, recordNumber, recordTime, recordPerson);
+        return Objects.hash(id, number, time, person);
     }
 
     @ManyToOne
@@ -105,10 +105,10 @@ public class RecordIn {
     @Override
     public String toString() {
         return "RecordIn{" +
-                "recordId=" + recordId +
-                ", recordNumber=" + recordNumber +
-                ", recordTime=" + recordTime +
-                ", recordPerson='" + recordPerson + '\'' +
+                "recordId=" + id +
+                ", recordNumber=" + number +
+                ", recordTime=" + time +
+                ", recordPerson='" + person + '\'' +
                 ", supplier=" + supplier +
                 ", parts=" + parts +
                 ", repository=" + repository +

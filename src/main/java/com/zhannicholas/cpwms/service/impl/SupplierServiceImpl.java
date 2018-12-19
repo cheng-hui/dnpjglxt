@@ -75,7 +75,7 @@ public class SupplierServiceImpl implements SupplierService {
      * @param supplier  供应商
      * @return  若供应商信息满足要求则返回true，否则返回false
      */
-    private boolean isValidSupplier(Supplier supplier){
+    public boolean isValidSupplier(Supplier supplier){
         if(supplier != null){
             return supplier.getSupplierName() != null &&
                     supplier.getSupplierPerson() != null &&
@@ -91,7 +91,7 @@ public class SupplierServiceImpl implements SupplierService {
      * @param supplierId    供应商id
      * @return  若供应商id合法则返回true,否则返回false
      */
-    private boolean isValidSupplierId(int supplierId){
+    public boolean isValidSupplierId(int supplierId){
         Supplier supplier = supplierRepository.findBySupplierId(supplierId);
         return supplier != null;
     }

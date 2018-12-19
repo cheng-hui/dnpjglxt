@@ -249,20 +249,17 @@ function fetchStorage(){
 function loadStorageInfo(){
 	if(stockin_repository != null && stockin_goods != null){
 		$.ajax({
-			type : 'GET',
-			url : 'storageManage/getStorageListWithRepository',
+			type : 'POST',
+			url : 'storageManage/getStorageNumberById',
 			dataType : 'json',
 			contentType : 'application/json',
-			data : {
-				offset : -1,
-				limit : -1,
-				searchType : 'searchByGoodsID',
-				repositoryBelong : stockin_repository,
-				keyword : stockin_goods
-			},
+			data : JSON.stringify({
+                partsId : stockin_goods,
+				repoId : stockin_repository
+			}),
 			success : function(response){
-				if(response.total > 0){
-					data = response.rows[0].number;
+                var data = response.result;
+				if(data > 0){
 					$('#info_storage').text(data);
 				}else{
 					$('#info_storage').text('0');
@@ -285,15 +282,15 @@ function stockInOption(){
 		}
 
 		data = {
-			repositoryID : stockin_repository,
-			supplierID : stockin_supplier,
-			goodsID : stockin_goods,
+			repoId : stockin_repository,
+			supplierId : stockin_supplier,
+			partsId : stockin_goods,
 			number : $('#stockin_input').val(),
 		}
 
 		$.ajax({
 			type : 'POST',
-			url : 'stockRecordManage/stockIn',
+			url : 'storageManage/increaseStorage',
 			dataType : 'json',
 			content : 'application/json',
 			data : data,
@@ -353,7 +350,8 @@ function infoModal(type, msg) {
 	$('#info_modal').modal("show");
 }
 </script>
-				<div class="panel panel-default">
+
+<div class="panel panel-default">
 					<ol class="breadcrumb">
 						<li>配件入库</li>
 					</ol>
@@ -566,8 +564,8 @@ function infoModal(type, msg) {
 						</div>
 					</div>
 				</div>
-				<!-- 提示消息模态框 -->
-				<div class="modal fade" id="info_modal" table-index="-1" role="dialog"
+<!-- 提示消息模态框 -->
+<div class="modal fade" id="info_modal" table-index="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">

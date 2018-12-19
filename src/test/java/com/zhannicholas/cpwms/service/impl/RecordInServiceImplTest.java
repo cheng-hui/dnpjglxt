@@ -1,7 +1,6 @@
 package com.zhannicholas.cpwms.service.impl;
 
 import com.zhannicholas.cpwms.domain.model.RecordIn;
-import com.zhannicholas.cpwms.domain.repository.RepoRepository;
 import com.zhannicholas.cpwms.service.PartsService;
 import com.zhannicholas.cpwms.service.RecordInService;
 import com.zhannicholas.cpwms.service.RespositoryService;
@@ -12,10 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.sql.Date;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -53,9 +48,9 @@ public class RecordInServiceImplTest {
     @Test
     public void save() {
         RecordIn recordIn = new RecordIn();
-        recordIn.setRecordNumber(1);
-        recordIn.setRecordPerson("詹伟伟");
-        recordIn.setRecordTime(DateUtil.fromUtilDate());
+        recordIn.setNumber(1);
+        recordIn.setPerson("詹伟伟");
+        recordIn.setTime(DateUtil.fromUtilDate());
         //recordIn.setSupplier(supplierService.findBySupplierName("小米"));
         //recordIn.setParts(partsService.findByPartsName("小米8").get(0));
         //recordIn.setRepository(respositoryService.findOne(1006));

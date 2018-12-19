@@ -13,4 +13,6 @@ public interface PartsService {
     Map<String, Object> findByPartsNameContaining(String partsName, Pageable pageable);
     boolean delete(int partsId);
     Map<String, Object> findAllByPartsNameContaining(String partsName);
+    boolean isValidParts(Parts parts);
+    boolean isValidPartsId(int partsId);
 }

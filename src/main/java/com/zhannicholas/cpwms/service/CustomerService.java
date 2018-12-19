@@ -13,4 +13,6 @@ public interface CustomerService {
     Map<String, Object> findByCustomerNameContaining(String customerName, Pageable pageable);
     boolean delete(int customerId);
     Map<String, Object> findAllByCustomerNameContaining(String customerName);
+    boolean isValidCustomer(Customer customer);
+    boolean isValidCustomerId(int customerId);
 }

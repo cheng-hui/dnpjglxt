@@ -15,4 +15,6 @@ public interface RespositoryService {
     Map<String, Object> findAllUnassignedRepo();
     Respository findById(int repoId);
     List<Respository> findAll();
+    boolean isValidRepoId(int repoId);
+    boolean isValidRepo(Respository repo);
 }

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -56,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean delete(int customerId) {
-        if(isValidSupplierId(customerId)){
+        if(isValidCustomerId(customerId)){
             customerRepository.deleteById(customerId);
             return true;
         }
@@ -73,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @param customer  客户
      * @return  若客户信息满足要求则返回true，否则返回false
      */
-    private boolean isValidCustomer(Customer customer){
+    public boolean isValidCustomer(Customer customer){
         if(customer != null){
             return customer.getCustomerName() != null &&
                     customer.getCustomerPerson() != null &&
@@ -89,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @param customerId    客户id
      * @return  若客户id合法则返回true,否则返回false
      */
-    private boolean isValidSupplierId(int customerId){
+    public boolean isValidCustomerId(int customerId){
         return customerRepository.findByCustomerId(customerId) != null;
     }
 }

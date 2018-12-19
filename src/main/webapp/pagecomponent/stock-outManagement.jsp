@@ -242,30 +242,27 @@ function fetchStorage(){
 
 function loadStorageInfo(){
 	if(stockout_repository != null && stockout_goods != null){
-		$.ajax({
-			type : 'GET',
-			url : 'storageManage/getStorageListWithRepository',
-			dataType : 'json',
-			contentType : 'application/json',
-			data : {
-				offset : -1,
-				limit : -1,
-				searchType : 'searchByGoodsID',
-				repositoryBelong : stockout_repository,
-				keyword : stockout_goods
-			},
-			success : function(response){
-				if(response.total > 0){
-					data = response.rows[0].number;
-					$('#info_storage').text(data);
-				}else{
-					$('#info_storage').text('0');
-				}
-			},
-			error : function(response){
-				
-			}
-		})
+        $.ajax({
+            type : 'POST',
+            url : 'storageManage/getStorageNumberById',
+            dataType : 'json',
+            contentType : 'application/json',
+            data : JSON.stringify({
+                partsId : stockout_goods,
+                repoId : stockout_repository
+            }),
+            success : function(response){
+                var data = response.result;
+                if(data > 0){
+                    $('#info_storage').text(data);
+                }else{
+                    $('#info_storage').text('0');
+                }
+            },
+            error : function(response){
+
+            }
+        })
 	}
 }
 
@@ -279,15 +276,15 @@ function stockoutOperation(){
 		}
 
 		data = {
-			customerID : stockout_customer,
-			goodsID : stockout_goods,
-			repositoryID : stockout_repository,
+			customerId : stockout_customer,
+			partsId : stockout_goods,
+			repoId : stockout_repository,
 			number : $('#stockout_input').val(),
 		}
 
 		$.ajax({
 			type : 'POST',
-			url : 'stockRecordManage/stockOut',
+			url : 'storageManage/decreaseStorage',
 			dataType : 'json',
 			content : 'application/json',
 			data : data,

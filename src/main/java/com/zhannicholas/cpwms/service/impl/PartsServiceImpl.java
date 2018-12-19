@@ -56,12 +56,11 @@ public class PartsServiceImpl implements PartsService {
 
     @Override
     public boolean delete(int partsId) {
-        Parts parts = partsRepository.findByPartsId(partsId);
-        if(parts == null){
-            return false;
+        if(isValidPartsId(partsId)) {
+            partsRepository.deleteById(partsId);
+            return true;
         }
-        partsRepository.deleteById(partsId);
-        return true;
+        return false;
     }
 
     @Override
@@ -75,10 +74,14 @@ public class PartsServiceImpl implements PartsService {
      * @param parts 配件信息
      * @return 若配件信息满足要求则返回true，否则返回false
      */
-    private boolean isValidParts(Parts parts){
+    public boolean isValidParts(Parts parts){
         if(parts != null){
             return parts.getPartsName() != null && parts.getPartsValue() > 0;
         }
         return false;
+    }
+
+    public boolean isValidPartsId(int partsId){
+        return partsRepository.findByPartsId(partsId) != null;
     }
 }

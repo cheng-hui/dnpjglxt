@@ -16,5 +16,7 @@ public interface RecordInService {
     Page<RecordIn> findByRepository(Respository respository, Pageable pageable);
     RecordIn findOne(int recordId);
     void save(RecordIn recordIn);
-    void delete(int recordId);
+    boolean delete(int recordId);
+    boolean saveRecord(int supplierId, int partsId, int number, String person, int repoId);
+    boolean isValidRecordInId(int recordInId);
 }

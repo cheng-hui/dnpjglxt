@@ -16,5 +16,7 @@ public interface RecordOutService {
     Page<RecordOut> findByRepository(Respository respository, Pageable pageable);
     RecordOut findOne(int recordId);
     void save(RecordOut recordOut);
-    void delete(int recordId);
+    boolean delete(int recordId);
+    boolean saveRecord(int customerId, int partsId, int number, String person, int repoId);
+    boolean isValidRecordOutId(int recordOutId);
 }
