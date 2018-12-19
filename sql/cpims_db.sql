@@ -12,7 +12,7 @@
  Target Server Version : 14003045
  File Encoding         : 65001
 
- Date: 18/12/2018 18:36:25
+ Date: 19/12/2018 21:55:27
 */
 
 
@@ -50,6 +50,12 @@ INSERT INTO [dbo].[cpims_customer] ([CUSTOMER_ID], [CUSTOMER_NAME], [CUSTOMER_PE
 GO
 
 INSERT INTO [dbo].[cpims_customer] ([CUSTOMER_ID], [CUSTOMER_NAME], [CUSTOMER_PERSON], [CUSTOMER_TEL], [CUSTOMER_EMAIL], [CUSTOMER_ADDRESS]) VALUES (N'1216', N'贵阳小爱机器人科技有限公司', N'谢光莲', N'574935749', N'monica@xiaoi.com', N'贵州省贵阳市观山湖区贵州金融城')
+GO
+
+INSERT INTO [dbo].[cpims_customer] ([CUSTOMER_ID], [CUSTOMER_NAME], [CUSTOMER_PERSON], [CUSTOMER_TEL], [CUSTOMER_EMAIL], [CUSTOMER_ADDRESS]) VALUES (N'1217', N'贵阳小爱机器人科技有限公司', N'谢光莲', N'574935749', N'monica@xiaoi.com', N'贵州省贵阳市观山湖区贵州金融城')
+GO
+
+INSERT INTO [dbo].[cpims_customer] ([CUSTOMER_ID], [CUSTOMER_NAME], [CUSTOMER_PERSON], [CUSTOMER_TEL], [CUSTOMER_EMAIL], [CUSTOMER_ADDRESS]) VALUES (N'1218', N'贵阳小爱机器人科技有限公司', N'谢光莲', N'574935749', N'monica@xiaoi.com', N'贵州省贵阳市观山湖区贵州金融城')
 GO
 
 SET IDENTITY_INSERT [dbo].[cpims_customer] OFF
@@ -248,7 +254,7 @@ IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[cp
 GO
 
 CREATE TABLE [dbo].[cpims_record_storage] (
-  [RECORD_PARTSID] int  IDENTITY(1,1) NOT NULL,
+  [RECORD_PARTSID] int NOT NULL,
   [RECORD_REPOSITORY] int  NOT NULL,
   [RECORD_NUMBER] int  NOT NULL
 )
@@ -261,8 +267,6 @@ GO
 -- ----------------------------
 -- Records of cpims_record_storage
 -- ----------------------------
-SET IDENTITY_INSERT [dbo].[cpims_record_storage] ON
-GO
 
 INSERT INTO [dbo].[cpims_record_storage] ([RECORD_PARTSID], [RECORD_REPOSITORY], [RECORD_NUMBER]) VALUES (N'103', N'1005', N'10000')
 GO
@@ -273,8 +277,6 @@ GO
 INSERT INTO [dbo].[cpims_record_storage] ([RECORD_PARTSID], [RECORD_REPOSITORY], [RECORD_NUMBER]) VALUES (N'105', N'1004', N'2000')
 GO
 
-SET IDENTITY_INSERT [dbo].[cpims_record_storage] OFF
-GO
 
 
 -- ----------------------------
@@ -311,7 +313,7 @@ GO
 INSERT INTO [dbo].[cpims_repo_admin] ([REPO_ADMIN_ID], [REPO_ADMIN_NAME], [REPO_ADMIN_SEX], [REPO_ADMIN_TEL], [REPO_ADMIN_ADDRESS], [REPO_ADMIN_BIRTH], [REPO_ADMIN_REPOID]) VALUES (N'1019', N'李富荣', N'男', N'1234', N'广州', N'2016-12-07 00:00:00.0000000', N'1003')
 GO
 
-INSERT INTO [dbo].[cpims_repo_admin] ([REPO_ADMIN_ID], [REPO_ADMIN_NAME], [REPO_ADMIN_SEX], [REPO_ADMIN_TEL], [REPO_ADMIN_ADDRESS], [REPO_ADMIN_BIRTH], [REPO_ADMIN_REPOID]) VALUES (N'1031', N'111', N'男', N'111', N'111', N'2018-12-12 00:00:00.0000000', NULL)
+INSERT INTO [dbo].[cpims_repo_admin] ([REPO_ADMIN_ID], [REPO_ADMIN_NAME], [REPO_ADMIN_SEX], [REPO_ADMIN_TEL], [REPO_ADMIN_ADDRESS], [REPO_ADMIN_BIRTH], [REPO_ADMIN_REPOID]) VALUES (N'1036', N'张三', N'男', N'13708991488', N'贵州省贵阳市花溪区', N'1988-09-11 00:00:00.0000000', N'1007')
 GO
 
 SET IDENTITY_INSERT [dbo].[cpims_repo_admin] OFF
@@ -354,6 +356,9 @@ INSERT INTO [dbo].[cpims_respository] ([REPO_ID], [REPO_ADDRESS], [REPO_STATUS],
 GO
 
 INSERT INTO [dbo].[cpims_respository] ([REPO_ID], [REPO_ADDRESS], [REPO_STATUS], [REPO_AREA], [REPO_DESC]) VALUES (N'1006', N'贵州省贵阳市花溪区', N'可用', N'5000平米', N'大容量，交通不太方便')
+GO
+
+INSERT INTO [dbo].[cpims_respository] ([REPO_ID], [REPO_ADDRESS], [REPO_STATUS], [REPO_AREA], [REPO_DESC]) VALUES (N'1007', N'贵阳市观山湖区观山东路', N'不可用', N'1000平米', N'')
 GO
 
 SET IDENTITY_INSERT [dbo].[cpims_respository] OFF
@@ -402,6 +407,12 @@ GO
 INSERT INTO [dbo].[cpims_supplier] ([SUPPLIER_ID], [SUPPLIER_NAME], [SUPPLIER_PERSON], [SUPPLIER_TEL], [SUPPLIER_EMAIL], [SUPPLIER_ADDRESS]) VALUES (N'1019', N'深圳市亚宁电子有限公司', N'叶春恒', N' 86-0755-89574775', N'yechunheng@yaning.com', N'深圳市龙岗区布吉镇丹竹头沙平北路462号1楼')
 GO
 
+INSERT INTO [dbo].[cpims_supplier] ([SUPPLIER_ID], [SUPPLIER_NAME], [SUPPLIER_PERSON], [SUPPLIER_TEL], [SUPPLIER_EMAIL], [SUPPLIER_ADDRESS]) VALUES (N'1020', N'Intel', N'Jack', N'534957349', N'Jack@Intel.com', N'中国 广州')
+GO
+
+INSERT INTO [dbo].[cpims_supplier] ([SUPPLIER_ID], [SUPPLIER_NAME], [SUPPLIER_PERSON], [SUPPLIER_TEL], [SUPPLIER_EMAIL], [SUPPLIER_ADDRESS]) VALUES (N'1021', N'Intel', N'Jack', N'534957349', N'Jack@Intel.com', N'中国 广州')
+GO
+
 SET IDENTITY_INSERT [dbo].[cpims_supplier] OFF
 GO
 
@@ -414,7 +425,7 @@ IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[cp
 GO
 
 CREATE TABLE [dbo].[cpims_user] (
-  [USER_ID] int NOT NULL,
+  [USER_ID] int  NOT NULL,
   [USER_USERNAME] nvarchar(30) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL,
   [USER_PASSWORD] nvarchar(40) COLLATE SQL_Latin1_General_CP1_CI_AS  NOT NULL
 )
@@ -427,16 +438,20 @@ GO
 -- ----------------------------
 -- Records of cpims_user
 -- ----------------------------
-
-INSERT INTO [dbo].[cpims_user] ([USER_ID], [USER_USERNAME], [USER_PASSWORD]) VALUES (N'1001', N'admin', N'6f5379e73c1a9eac6163ab8eaec7e41c')
+INSERT INTO [dbo].[cpims_user]  VALUES (N'0', N'詹伟伟', N'123456')
 GO
 
-INSERT INTO [dbo].[cpims_user] ([USER_ID], [USER_USERNAME], [USER_PASSWORD]) VALUES (N'1018', N'王皓', N'50f202f4862360e55635b0a9616ded13')
+INSERT INTO [dbo].[cpims_user]  VALUES (N'1001', N'admin', N'6f5379e73c1a9eac6163ab8eaec7e41c')
 GO
 
-INSERT INTO [dbo].[cpims_user] ([USER_ID], [USER_USERNAME], [USER_PASSWORD]) VALUES (N'1019', N'李富荣', N'c4b3af5a5ab3e3d5aac4c5a5436201b8')
+INSERT INTO [dbo].[cpims_user]  VALUES (N'1018', N'王皓', N'50f202f4862360e55635b0a9616ded13')
 GO
 
+INSERT INTO [dbo].[cpims_user]  VALUES (N'1019', N'李富荣', N'c4b3af5a5ab3e3d5aac4c5a5436201b8')
+GO
+
+INSERT INTO [dbo].[cpims_user]  VALUES (N'1036', N'张三', N'75de88b7ad86c73a90cab60ff96743a1')
+GO
 
 
 -- ----------------------------
