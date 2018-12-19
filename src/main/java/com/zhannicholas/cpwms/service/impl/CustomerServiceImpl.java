@@ -47,6 +47,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Map<String, Object> findByCustomerNameContaining(String customerName, Pageable pageable) {
+        if(pageable == null){
+            return findAllByCustomerNameContaining(customerName);
+        }
         Page<Customer> customerPage = customerRepository.findByCustomerNameContaining(customerName, pageable);
         return ToMapUtil.fromAPage(customerPage);
     }
@@ -58,6 +61,11 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Map<String, Object> findAllByCustomerNameContaining(String customerName) {
+        return ToMapUtil.fromAList(customerRepository.findAllByCustomerNameContaining(customerName));
     }
 
     /**

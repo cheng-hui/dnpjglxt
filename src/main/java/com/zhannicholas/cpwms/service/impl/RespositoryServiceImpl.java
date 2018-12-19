@@ -30,8 +30,15 @@ public class RespositoryServiceImpl implements RespositoryService {
 
     @Override
     public Map<String, Object> findAll(Pageable pageable) {
-        Page<Respository> repoPage = repoRepository.findAll(pageable);
-        List<Respository> respositoryList = repoPage.getContent();
+        List<Respository> respositoryList = null;
+        if(pageable == null){
+            respositoryList = repoRepository.findAll();
+            System.out.println(respositoryList);
+        }
+        else{
+            Page<Respository> repoPage = repoRepository.findAll(pageable);
+            respositoryList = repoPage.getContent();
+        }
         List<RepoVo> repoVoList = new ArrayList<>();
         for(Respository respository: respositoryList){
             repoVoList.add(repo2RepoVo(respository));
@@ -83,6 +90,11 @@ public class RespositoryServiceImpl implements RespositoryService {
     @Override
     public Respository findById(int repoId) {
         return repoRepository.findByRepoId(repoId);
+    }
+
+    @Override
+    public List<Respository> findAll() {
+        return repoRepository.findAll();
     }
 
     /**

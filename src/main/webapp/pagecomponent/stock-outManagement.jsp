@@ -28,11 +28,11 @@ function dataValidateInit(){
 			stockout_input : {
 				validators : {
 					notEmpty : {
-						message : '入库数量不能为空'
+						message : '出库数量不能为空'
 					},
 					greaterThan: {
                         value: 0,
-                        message: '入库数量不能小于0'
+                        message: '出库数量不能小于0'
                     }
 				}
 			}
@@ -40,7 +40,7 @@ function dataValidateInit(){
 	});
 }
 
-//货物信息自动匹配
+//配件信息自动匹配
 function goodsAutocomplete(){
 	$('#goods_input').autocomplete({
 		minLength : 0,
@@ -48,7 +48,7 @@ function goodsAutocomplete(){
 		source : function(request, response){
 			$.ajax({
 				type : 'GET',
-				url : 'goodsManage/getGoodsList',
+				url : 'partsManage/getPartsList',
 				dataType : 'json',
 				contentType : 'application/json',
 				data : {
@@ -59,9 +59,9 @@ function goodsAutocomplete(){
 				},
 				success : function(data){
 					var autoCompleteInfo = new Array();
-					$.each(data.rows, function(index,elem){
-						goodsCache.push(elem);
-						autoCompleteInfo.push({label:elem.name,value:elem.id});
+					$.each(data.rows, function(index,element){
+						goodsCache.push(element);
+						autoCompleteInfo.push({label:element.partsName,value:element.partsId});
 					});
 					response(autoCompleteInfo);
 				}
@@ -99,9 +99,9 @@ function customerAutocomplete(){
 				},
 				success : function(data){
 					var autoCompleteInfo = Array();
-					$.each(data.rows,function(index,elem){
-						customerCache.push(elem);
-						autoCompleteInfo.push({label:elem.name,value:elem.id});
+					$.each(data.rows,function(index,element){
+						customerCache.push(element);
+						autoCompleteInfo.push({label:element.customerName,value:element.customerId});
 					});
 					response(autoCompleteInfo);
 				}
@@ -123,72 +123,72 @@ function customerAutocomplete(){
 
 function goodsInfoSet(goodsID){
 	var detailInfo;
-	$.each(goodsCache,function(index,elem){
-		if(elem.id == goodsID){
-			detailInfo = elem;
+	$.each(goodsCache,function(index,element){
+		if(element.partsId == goodsID){
+			detailInfo = element;
 			if(detailInfo.id==null)
 				$('#info_goods_ID').text('-');
 			else
-				$('#info_goods_ID').text(detailInfo.id);
+				$('#info_goods_ID').text(detailInfo.partsId);
 			
-			if(detailInfo.name==null)
+			if(detailInfo.partsName==null)
 				$('#info_goods_name').text('-');
 			else
-				$('#info_goods_name').text(detailInfo.name);
+				$('#info_goods_name').text(detailInfo.partsName);
 			
-			if(detailInfo.type==null)
+			if(detailInfo.partsType==null)
 				$('#info_goods_type').text('-');
 			else
-				$('#info_goods_type').text(detailInfo.type);
+				$('#info_goods_type').text(detailInfo.partsType);
 			
-			if(detailInfo.size==null)
+			if(detailInfo.partsSize==null)
 				$('#info_goods_size').text('-');
 			else
-				$('#info_goods_size').text(detailInfo.size);
+				$('#info_goods_size').text(detailInfo.partsSize);
 			
-			if(detailInfo.value==null)
+			if(detailInfo.partsValue==null)
 				$('#info_goods_value').text('-');
 			else
-				$('#info_goods_value').text(detailInfo.value);
+				$('#info_goods_value').text(detailInfo.partsValue);
 		}
 	})
 }
 
 function customerInfoSet(customerID){
 	var detailInfo;
-	$.each(customerCache,function(index,elem){
-		if(elem.id == customerID){
-			detailInfo = elem;
+	$.each(customerCache,function(index,element){
+		if(element.customerId == customerID){
+			detailInfo = element;
 
-			if(detailInfo.id == null)
+			if(detailInfo.customerId == null)
 				$('#info_customer_ID').text('-');
 			else
-				$('#info_customer_ID').text(detailInfo.id);
+				$('#info_customer_ID').text(detailInfo.customerId);
 			
-			if(detailInfo.name == null)
+			if(detailInfo.customerName == null)
 				$('#info_customer_name').text('-');
 			else
-				$('#info_customer_name').text(detailInfo.name);
+				$('#info_customer_name').text(detailInfo.customerName);
 			
-			if(detailInfo.tel == null)
+			if(detailInfo.customerTel == null)
 				$('#info_customer_tel').text('-');
 			else
-				$('#info_customer_tel').text(detailInfo.tel);
+				$('#info_customer_tel').text(detailInfo.customerTel);
 			
-			if(detailInfo.address == null)
+			if(detailInfo.customerAddress == null)
 				$('#info_customer_address').text('-');
 			else
-				$('#info_customer_address').text(detailInfo.address);
+				$('#info_customer_address').text(detailInfo.customerAddress);
 			
-			if(detailInfo.email == null)
+			if(detailInfo.customerEmail == null)
 				$('#info_customer_email').text('-');
 			else
-				$('#info_customer_email').text(detailInfo.email);
+				$('#info_customer_email').text(detailInfo.customerEmail);
 			
-			if(detailInfo.personInCharge == null)
+			if(detailInfo.customerPerson == null)
 				$('#info_customer_person').text('-');
 			else
-				$('#info_customer_person').text(detailInfo.personInCharge);
+				$('#info_customer_person').text(detailInfo.customerPerson);
 				
 		}
 	})
@@ -222,8 +222,8 @@ function repositorySelectorInit(){
 			limit : -1
 		},
 		success : function(response){
-			$.each(response.rows,function(index,elem){
-				$('#repository_selector').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
+			$.each(response.rows,function(index,element){
+				$('#repository_selector').append("<option value='" + element.repoId + "'>" + element.repoId +"号仓库</option>");
 			});
 		},
 		error : function(response){
@@ -269,7 +269,7 @@ function loadStorageInfo(){
 	}
 }
 
-//执行货物出库操作
+//执行配件出库操作
 function stockoutOperation(){
 	$('#submit').click(function(){
 		// data validate
@@ -297,11 +297,11 @@ function stockoutOperation(){
 				
 				if(response.result == "success"){
 					type = 'success';
-					msg = '货物出库成功';
+					msg = '配件出库成功';
 					inputReset();
 				}else{
 					type = 'error';
-					msg = '货物出库失败'
+					msg = '配件出库失败'
 				}
 				infoModal(type, msg);
 			},
@@ -349,7 +349,7 @@ function infoModal(type, msg) {
 
 <div class="panel panel-default">
 					<ol class="breadcrumb">
-						<li>货物出库</li>
+						<li>配件出库</li>
 					</ol>
 					<div class="panel-body">
 						<div class="row">
@@ -372,8 +372,8 @@ function infoModal(type, msg) {
 									<div class="col-md-10 col-sm-11">
 										<form action="" class="form-inline">
 											<div class="form-group">
-												<label for="" class="form-label">出库货物：</label>
-												<input type="text" class="form-control" id="goods_input" placeholder="请输入货物名称">
+												<label for="" class="form-label">出库配件：</label>
+												<input type="text" class="form-control" id="goods_input" placeholder="请输入配件名称">
 											</div>
 										</form>
 									</div>
@@ -463,7 +463,7 @@ function infoModal(type, msg) {
 								<div class="row">
 									<div class="col-md-1 col-sm-1"></div>
 									<div class="col-md-11 col-sm-11">
-										<label for="" class="text-info">货物信息</label>
+										<label for="" class="text-info">配件信息</label>
 									</div>
 								</div>
 								<div class="row">
@@ -472,7 +472,7 @@ function infoModal(type, msg) {
 										<div class="col-md-6">
 											<div style="margin-top:5px">
 												<div class="col-md-6">
-													<span for="" class="pull-right">货物ID：</span>
+													<span for="" class="pull-right">配件ID：</span>
 												</div>
 												<div class="col-md-6">
 													<span id="info_goods_ID">-</span>
@@ -480,7 +480,7 @@ function infoModal(type, msg) {
 											</div>
 											<div style="margin-top:5px">
 												<div class="col-md-6">
-													<span for="" class="pull-right">货物类型：</span>
+													<span for="" class="pull-right">配件类型：</span>
 												</div>
 												<div class="col-md-6">
 													<span id="info_goods_type">-</span>
@@ -488,7 +488,7 @@ function infoModal(type, msg) {
 											</div>
 											<div style="margin-top:5px">
 												<div class="col-md-6">
-													<span for="" class="pull-right">货物名：</span>
+													<span for="" class="pull-right">配件名：</span>
 												</div>
 												<div class="col-md-6">
 													<span id="info_goods_name">-</span>
@@ -498,7 +498,7 @@ function infoModal(type, msg) {
 										<div class="col-md-6">
 											<div style="margin-top:5px">
 												<div class="col-md-6">
-													<span for="" class="pull-right">货物规格：</span>
+													<span for="" class="pull-right">配件规格：</span>
 												</div>
 												<div class="col-md-6">
 													<span id="info_goods_size">-</span>
@@ -506,7 +506,7 @@ function infoModal(type, msg) {
 											</div>
 											<div style="margin-top:5px">
 												<div class="col-md-6">
-													<span for="" class="pull-right">货物价值：</span>
+													<span for="" class="pull-right">配件价值：</span>
 												</div>
 												<div class="col-md-6">
 													<span id="info_goods_value">-</span>

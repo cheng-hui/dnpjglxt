@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -45,6 +46,10 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Map<String, Object> findBySupplierNameContaining(String supplierName, Pageable pageable) {
+        if(pageable == null){
+            System.out.println(findAllBySupplierNameContaining(supplierName));
+            return findAllBySupplierNameContaining(supplierName);
+        }
         Page<Supplier> supplierPage = supplierRepository.findBySupplierNameContaining(supplierName, pageable);
         return ToMapUtil.fromAPage(supplierPage);
     }
@@ -57,6 +62,11 @@ public class SupplierServiceImpl implements SupplierService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Map<String, Object> findAllBySupplierNameContaining(String supplierName) {
+        return ToMapUtil.fromAList(supplierRepository.findAllBySupplierNameContaining(supplierName));
     }
 
 

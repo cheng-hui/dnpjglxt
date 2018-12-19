@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     /**
@@ -28,4 +30,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
      * @return  和 customerName 匹配的所有客户
      */
     Page<Customer> findByCustomerNameContaining(String customerName, Pageable pageable);
+
+    /**
+     * 查询所有客户---模糊查询
+     * @param customerName 客户名称
+     * @return 和 customerName 匹配的所有客户
+     */
+    List<Customer> findAllByCustomerNameContaining(String customerName);
 }

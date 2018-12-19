@@ -33,7 +33,10 @@ public class RepoController {
      * @return  符合要求的分页对象
      */
     private Map<String, Object> query(String searchType, int offset, int limit, String keyWord){
-        Pageable pageable = PageRequest.of(offset, limit);
+        Pageable pageable = null;
+        if(offset >= 0 && limit >= 0) {
+            pageable = PageRequest.of(offset, limit);
+        }
         switch (searchType){
             case SEARCH_BY_ID:
                 return respositoryService.findOne(Integer.parseInt(keyWord));

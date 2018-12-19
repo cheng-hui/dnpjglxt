@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -46,6 +47,9 @@ public class PartsServiceImpl implements PartsService {
 
     @Override
     public Map<String, Object> findByPartsNameContaining(String partsName, Pageable pageable) {
+        if(pageable == null){
+            return findAllByPartsNameContaining(partsName);
+        }
         Page<Parts> partsPage = partsRepository.findByPartsNameContaining(partsName, pageable);
         return ToMapUtil.fromAPage(partsPage);
     }
@@ -58,6 +62,11 @@ public class PartsServiceImpl implements PartsService {
         }
         partsRepository.deleteById(partsId);
         return true;
+    }
+
+    @Override
+    public Map<String, Object> findAllByPartsNameContaining(String partsName) {
+        return ToMapUtil.fromAList(partsRepository.findAllByPartsNameContaining(partsName));
     }
 
 

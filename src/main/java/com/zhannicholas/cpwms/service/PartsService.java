@@ -3,6 +3,7 @@ package com.zhannicholas.cpwms.service;
 import com.zhannicholas.cpwms.domain.model.Parts;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Map;
 
 public interface PartsService {
@@ -11,4 +12,5 @@ public interface PartsService {
     Map<String, Object> findOne(int partsId);
     Map<String, Object> findByPartsNameContaining(String partsName, Pageable pageable);
     boolean delete(int partsId);
+    Map<String, Object> findAllByPartsNameContaining(String partsName);
 }

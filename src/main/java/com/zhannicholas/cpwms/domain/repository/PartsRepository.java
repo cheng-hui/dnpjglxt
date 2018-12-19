@@ -4,7 +4,8 @@ import com.zhannicholas.cpwms.domain.model.Parts;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 
 public interface PartsRepository extends JpaRepository<Parts, Integer> {
@@ -30,4 +31,11 @@ public interface PartsRepository extends JpaRepository<Parts, Integer> {
      * @return  和 partsName 匹配的所有电脑配件
      */
     Page<Parts> findByPartsNameContaining(String partsName, Pageable pageable);
+
+    /**
+     * 查找所有的电脑配件---模糊查询
+     * @param partsName 电脑配件名
+     * @return  和 partsName 匹配的所有电脑配件
+     */
+    List<Parts> findAllByPartsNameContaining(String partsName);
 }

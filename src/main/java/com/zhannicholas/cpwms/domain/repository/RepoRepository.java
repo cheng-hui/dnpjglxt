@@ -32,6 +32,12 @@ public interface RepoRepository extends JpaRepository<Respository, Integer> {
     Page<Respository> findAll(Pageable pageable);
 
     /**
+     * 查询所有仓库---不分页
+     * @return  所有仓库组成的列表
+     */
+    List<Respository> findAll();
+
+    /**
      * 查询未被分配的仓库
      * @return  未被分配的仓库列表
      */
