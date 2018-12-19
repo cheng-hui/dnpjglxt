@@ -37,4 +37,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
      * @return 和 customerName 匹配的所有客户
      */
     List<Customer> findAllByCustomerNameContaining(String customerName);
+
+    /**
+     * 查找客户名为 customerName 的数量
+     * @param customerName  客户名
+     * @return  客户名为 customerName 的数量
+     */
+    int countByCustomerName(String customerName);
 }

@@ -36,4 +36,11 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
      * @return  和 supplierName 匹配的所有供应商
      */
     List<Supplier> findAllBySupplierNameContaining(String supplierName);
+
+    /**
+     * 查找名为 supplierName 的供应商
+     * @param supplierName  供应商名
+     * @return 名为 supplierName 的供应商
+     */
+    int countBySupplierName(String supplierName);
 }

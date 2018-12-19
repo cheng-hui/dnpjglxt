@@ -9,6 +9,7 @@ public interface SupplierService {
     Map<String, Object> findAll(Pageable pageable);
     boolean save(Supplier supplier);
     Map<String, Object> findOne(int supplierId);
+    int countSupplierName(String supplierName);
     Map<String, Object> findBySupplierNameContaining(String supplierName, Pageable pageable);
     boolean delete(int supplierId);
     Map<String, Object> findAllBySupplierNameContaining(String supplierName);

@@ -31,7 +31,8 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public boolean save(Supplier supplier) {
-        if(isValidSupplier(supplier)){
+        if(isValidSupplier(supplier) &&
+                countSupplierName(supplier.getSupplierName()) < 1){
             supplierRepository.save(supplier);
             return true;
         }
@@ -42,6 +43,11 @@ public class SupplierServiceImpl implements SupplierService {
     public Map<String, Object> findOne(int supplierId) {
         Supplier supplier = supplierRepository.findBySupplierId(supplierId);
         return ToMapUtil.fromAInstance(supplier);
+    }
+
+    @Override
+    public int countSupplierName(String supplierName) {
+        return supplierRepository.countBySupplierName(supplierName);
     }
 
     @Override

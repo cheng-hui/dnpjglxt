@@ -31,7 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean save(Customer customer) {
-        if(isValidCustomer(customer)){
+        if(isValidCustomer(customer) &&
+                countCustomerName(customer.getCustomerName()) < 1){
             customerRepository.save(customer);
             return true;
         }
@@ -65,6 +66,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Map<String, Object> findAllByCustomerNameContaining(String customerName) {
         return ToMapUtil.fromAList(customerRepository.findAllByCustomerNameContaining(customerName));
+    }
+
+    @Override
+    public int countCustomerName(String customerName) {
+        return customerRepository.countByCustomerName(customerName);
     }
 
     /**
