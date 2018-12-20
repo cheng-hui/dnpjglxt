@@ -252,11 +252,11 @@ function loadStorageInfo(){
 			type : 'POST',
 			url : 'storageManage/getStorageNumberById',
 			dataType : 'json',
-			contentType : 'application/json',
-			data : JSON.stringify({
+			content : 'application/json',
+			data : {
                 partsId : stockin_goods,
 				repoId : stockin_repository
-			}),
+			},
 			success : function(response){
                 var data = response.result;
 				if(data > 0){
@@ -266,7 +266,9 @@ function loadStorageInfo(){
 				}
 			},
 			error : function(response){
-				
+                var msg = "服务器错误";
+                var type = "error";
+                infoModal(type, msg);
 			}
 		})
 	}

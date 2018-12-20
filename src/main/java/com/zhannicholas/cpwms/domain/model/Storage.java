@@ -10,6 +10,8 @@ public class Storage {
     private int partsId;
     private int repoId;
     private int number;
+    private Parts parts;
+    private Respository respository;
 
     @Id
     @Column(name = "RECORD_PARTSID", nullable = false)
@@ -17,8 +19,8 @@ public class Storage {
         return partsId;
     }
 
-    public void setPartsId(int recordPartsId) {
-        this.partsId = recordPartsId;
+    public void setPartsId(int recordPartsid) {
+        this.partsId = recordPartsid;
     }
 
     @Id
@@ -56,12 +58,32 @@ public class Storage {
         return Objects.hash(partsId, repoId, number);
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RECORD_PARTSID", referencedColumnName = "PARTS_ID", nullable = false, insertable = false, updatable = false)
+    public Parts getParts() {
+        return parts;
+    }
+
+    public void setParts(Parts parts) {
+        this.parts = parts;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RECORD_REPOSITORY", referencedColumnName = "REPO_ID", nullable = false, insertable = false, updatable = false)
+    public Respository getRespository() {
+        return respository;
+    }
+
+    public void setRespository(Respository respository) {
+        this.respository = respository;
+    }
+
     @Override
     public String toString() {
         return "Storage{" +
-                "recordPartsid=" + partsId +
-                ", recordRepository=" + repoId +
-                ", recordNumber=" + number +
+                "partsId=" + partsId +
+                ", repoId=" + repoId +
+                ", number=" + number +
                 '}';
     }
 }

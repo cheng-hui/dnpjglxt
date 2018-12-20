@@ -16,6 +16,7 @@ public class Parts {
     private double partsValue;
     private List<RecordIn> recordInList;
     private List<RecordOut> recordOutList;
+    private List<Storage> storageList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,5 +115,15 @@ public class Parts {
                 ", partsSize='" + partsSize + '\'' +
                 ", partsValue=" + partsValue +
                 '}';
+    }
+
+    @OneToMany(mappedBy = "parts")
+    @JsonIgnore
+    public List<Storage> getStorageList() {
+        return storageList;
+    }
+
+    public void setStorageList(List<Storage> storageList) {
+        this.storageList = storageList;
     }
 }

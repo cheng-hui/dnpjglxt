@@ -55,10 +55,6 @@ public class RepoController {
                                             @RequestParam(value = "offset", defaultValue = "0") int offset,
                                             @RequestParam(value = "limit", defaultValue = "5") int limit,
                                             @RequestParam("keyWord") String keyWord){
-        System.out.println("searchType: " + searchType +
-                "\noffset: " + offset +
-                "\nlimit: " + limit +
-                "\nkeyWord: " + keyWord);
 //        *******************************************************************************************
 //        注意：bootstrap table 中 offset 的计算方式为：pageSize * (pageNumber - 1);而 pageSize = limit;
 //        *******************************************************************************************

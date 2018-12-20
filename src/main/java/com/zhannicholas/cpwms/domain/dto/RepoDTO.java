@@ -1,7 +1,7 @@
-package com.zhannicholas.cpwms.web.vo;
+package com.zhannicholas.cpwms.domain.dto;
 
 // 仓库视图对象
-public class RepoVo {
+public class RepoDTO {
     private int repoId;
     private String repoAddress;
     private String repoStatus;
@@ -59,7 +59,7 @@ public class RepoVo {
 
     @Override
     public String toString() {
-        return "RepoVo{" +
+        return "RepoDTO{" +
                 "repoId=" + repoId +
                 ", repoAddress='" + repoAddress + '\'' +
                 ", repoStatus='" + repoStatus + '\'' +

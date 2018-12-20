@@ -1,11 +1,11 @@
 package com.zhannicholas.cpwms.service.impl;
 
+import com.zhannicholas.cpwms.domain.dto.RepoDTO;
 import com.zhannicholas.cpwms.domain.model.RepoAdmin;
 import com.zhannicholas.cpwms.domain.model.Respository;
 import com.zhannicholas.cpwms.domain.repository.RepoRepository;
 import com.zhannicholas.cpwms.service.RespositoryService;
 import com.zhannicholas.cpwms.util.ToMapUtil;
-import com.zhannicholas.cpwms.web.vo.RepoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,15 +39,15 @@ public class RespositoryServiceImpl implements RespositoryService {
             Page<Respository> repoPage = repoRepository.findAll(pageable);
             respositoryList = repoPage.getContent();
         }
-        List<RepoVo> repoVoList = new ArrayList<>();
+        List<RepoDTO> repoDTOList = new ArrayList<>();
         for(Respository respository: respositoryList){
-            repoVoList.add(repo2RepoVo(respository));
+            repoDTOList.add(repo2RepoDTO(respository));
         }
 
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("rows", repoVoList);
-        resultSet.put("total", repoVoList.size());
+        resultSet.put("rows", repoDTOList);
+        resultSet.put("total", repoDTOList.size());
         return resultSet;
     }
 
@@ -113,14 +113,14 @@ public class RespositoryServiceImpl implements RespositoryService {
 
     /**
      * 检查仓库视图信息是否满足要求
-     * @param repoVo  仓库
+     * @param repoDTO  仓库
      * @return  若仓库视图信息满足要求则返回true，否则返回false
      */
-    private boolean isValidRepoVo(RepoVo repoVo){
-        if(repoVo != null){
-            return repoVo.getRepoAddress() != null &&
-                    repoVo.getRepoStatus() != null &&
-                    repoVo.getRepoArea() != null;
+    private boolean isValidRepoDTO(RepoDTO repoDTO){
+        if(repoDTO != null){
+            return repoDTO.getRepoAddress() != null &&
+                    repoDTO.getRepoStatus() != null &&
+                    repoDTO.getRepoArea() != null;
         }
         return false;
     }
@@ -140,30 +140,30 @@ public class RespositoryServiceImpl implements RespositoryService {
      * @param repo  仓库对象
      * @return  repo 对应的视图对象
      */
-    private RepoVo repo2RepoVo(Respository repo){
-        RepoVo repoVo = new RepoVo();
-        repoVo.setRepoId(repo.getRepoId());
-        repoVo.setRepoAddress(repo.getRepoAddress());
-        repoVo.setRepoArea(repo.getRepoArea());
-        repoVo.setRepoStatus(repo.getRepoStatus());
-        repoVo.setRepoDesc(repo.getRepoDesc());
+    private RepoDTO repo2RepoDTO(Respository repo){
+        RepoDTO repoDTO = new RepoDTO();
+        repoDTO.setRepoId(repo.getRepoId());
+        repoDTO.setRepoAddress(repo.getRepoAddress());
+        repoDTO.setRepoArea(repo.getRepoArea());
+        repoDTO.setRepoStatus(repo.getRepoStatus());
+        repoDTO.setRepoDesc(repo.getRepoDesc());
         RepoAdmin repoAdmin = repo.getRepoAdmin();
-        repoVo.setRepoAdminName(repoAdmin != null ? repo.getRepoAdmin().getRepoAdminName() : null);
-        return repoVo;
+        repoDTO.setRepoAdminName(repoAdmin != null ? repo.getRepoAdmin().getRepoAdminName() : null);
+        return repoDTO;
     }
 
     /**
-     * 将 repoVo 转为实体对象
-     * @param repoVo    仓库视图对象
-     * @return  repoVo 对应的实体对象
+     * 将 repoDTO 转为实体对象
+     * @param repoDTO    仓库视图对象
+     * @return  repoDTO 对应的实体对象
      */
-    private Respository repoVo2Repo(RepoVo repoVo){
+    private Respository repoDTO2Repo(RepoDTO repoDTO){
         Respository repo = new Respository();
-        repo.setRepoId(repoVo.getRepoId());
-        repo.setRepoAddress(repoVo.getRepoAddress());
-        repo.setRepoArea(repoVo.getRepoArea());
-        repo.setRepoStatus(repoVo.getRepoStatus());
-        repo.setRepoDesc(repoVo.getRepoDesc());
+        repo.setRepoId(repoDTO.getRepoId());
+        repo.setRepoAddress(repoDTO.getRepoAddress());
+        repo.setRepoArea(repoDTO.getRepoArea());
+        repo.setRepoStatus(repoDTO.getRepoStatus());
+        repo.setRepoDesc(repoDTO.getRepoDesc());
         return repo;
     }
 }

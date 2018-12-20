@@ -1,6 +1,7 @@
 package com.zhannicholas.cpwms.domain.repository;
 
 import com.zhannicholas.cpwms.domain.model.Parts;
+import com.zhannicholas.cpwms.domain.model.Storage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

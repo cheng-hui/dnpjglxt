@@ -25,4 +25,10 @@ public class PartsRepositoryTest {
         Page<Parts> partsPage = partsRepository.findByPartsNameContaining(partsName, pageable);
         System.out.println(partsPage.getContent());
     }
+
+    @Test
+    public void testStorage(){
+        Parts parts = partsRepository.findByPartsId(110);
+        System.out.println(parts.getStorageList());
+    }
 }

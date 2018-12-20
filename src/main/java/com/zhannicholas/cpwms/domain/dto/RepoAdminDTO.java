@@ -1,9 +1,9 @@
-package com.zhannicholas.cpwms.web.vo;
+package com.zhannicholas.cpwms.domain.dto;
 
 import java.sql.Date;
 
 // 仓库管理员视图对象
-public class RepoAdminVo {
+public class RepoAdminDTO {
     private int repoAdminId;
     private String repoAdminName;
     private String repoAdminSex;

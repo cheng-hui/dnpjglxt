@@ -246,11 +246,11 @@ function loadStorageInfo(){
             type : 'POST',
             url : 'storageManage/getStorageNumberById',
             dataType : 'json',
-            contentType : 'application/json',
-            data : JSON.stringify({
+            content : 'application/json',
+            data : {
                 partsId : stockout_goods,
                 repoId : stockout_repository
-            }),
+            },
             success : function(response){
                 var data = response.result;
                 if(data > 0){

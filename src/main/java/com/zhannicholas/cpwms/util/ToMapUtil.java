@@ -19,12 +19,16 @@ public class ToMapUtil {
      */
     public static <E> Map<String, Object> fromAInstance(E e){
         List<E> elementList = new ArrayList<>();
-        elementList.add(e);
-
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
+        if(e != null){
+            elementList.add(e);
+            resultSet.put("total", 1);
+        }
+        else{
+            resultSet.put("total", 0);
+        }
         resultSet.put("rows", elementList);
-        resultSet.put("total", 1);
         return resultSet;
     }
 

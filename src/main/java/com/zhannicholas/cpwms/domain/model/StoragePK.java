@@ -6,27 +6,27 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class StoragePK implements Serializable {
-    private int partsId;
-    private int repoId;
+    private int recordPartsid;
+    private int recordRepository;
 
     @Column(name = "RECORD_PARTSID", nullable = false)
     @Id
     public int getPartsId() {
-        return partsId;
+        return recordPartsid;
     }
 
-    public void setPartsId(int partsId) {
-        this.partsId = partsId;
+    public void setPartsId(int recordPartsid) {
+        this.recordPartsid = recordPartsid;
     }
 
     @Column(name = "RECORD_REPOSITORY", nullable = false)
     @Id
     public int getRepoId() {
-        return repoId;
+        return recordRepository;
     }
 
-    public void setRepoId(int repoId) {
-        this.repoId = repoId;
+    public void setRepoId(int recordRepository) {
+        this.recordRepository = recordRepository;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class StoragePK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StoragePK storagePK = (StoragePK) o;
-        return partsId == storagePK.partsId &&
-                repoId == storagePK.repoId;
+        return recordPartsid == storagePK.recordPartsid &&
+                recordRepository == storagePK.recordRepository;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(partsId, repoId);
+        return Objects.hash(recordPartsid, recordRepository);
     }
 }

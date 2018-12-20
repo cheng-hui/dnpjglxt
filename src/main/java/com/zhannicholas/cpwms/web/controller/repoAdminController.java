@@ -8,8 +8,7 @@ import com.zhannicholas.cpwms.service.UserService;
 import com.zhannicholas.cpwms.util.Constants;
 import com.zhannicholas.cpwms.util.EncryptUtil;
 import com.zhannicholas.cpwms.util.ToMapUtil;
-import com.zhannicholas.cpwms.web.vo.RepoAdminVo;
-import org.hibernate.validator.constraints.pl.REGON;
+import com.zhannicholas.cpwms.domain.dto.RepoAdminDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.util.Map;
 
 import static com.zhannicholas.cpwms.util.Constants.*;
@@ -53,7 +51,7 @@ public class repoAdminController {
                 return repoAdminService.findAll(pageable);
             case SEARCH_BY_NAME:
                 return repoAdminService.findByRepoAdminNameContaining(keyWord, pageable);
-            case SEARCH_BY_REPOSITORY:
+            case SEARCH_BY_REPOSITORY_ID:
                 return repoAdminService.findByRepoId(Integer.parseInt(keyWord));
             default:
                 return repoAdminService.findAll(pageable);
@@ -82,15 +80,15 @@ public class repoAdminController {
      */
     @RequestMapping(value = "updateRepositoryAdmin", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updateRepoAdmin(@RequestBody RepoAdminVo repoAdminVo){
+    public Map<String, Object> updateRepoAdmin(@RequestBody RepoAdminDTO repoAdminDTO){
         RepoAdmin repoAdmin = new RepoAdmin();
-        repoAdmin.setRepoAdminId(repoAdminVo.getRepoAdminId());
-        repoAdmin.setRepoAdminName(repoAdminVo.getRepoAdminName());
-        repoAdmin.setRepoAdminSex(repoAdminVo.getRepoAdminSex());
-        repoAdmin.setRepoAdminTel(repoAdminVo.getRepoAdminTel());
-        repoAdmin.setRepoAdminAddress(repoAdminVo.getRepoAdminAddress());
-        repoAdmin.setRepoAdminBirth(repoAdminVo.getRepoAdminBirth());
-        repoAdmin.setRepository(respositoryService.findById(repoAdminVo.getRepoId()));
+        repoAdmin.setRepoAdminId(repoAdminDTO.getRepoAdminId());
+        repoAdmin.setRepoAdminName(repoAdminDTO.getRepoAdminName());
+        repoAdmin.setRepoAdminSex(repoAdminDTO.getRepoAdminSex());
+        repoAdmin.setRepoAdminTel(repoAdminDTO.getRepoAdminTel());
+        repoAdmin.setRepoAdminAddress(repoAdminDTO.getRepoAdminAddress());
+        repoAdmin.setRepoAdminBirth(repoAdminDTO.getRepoAdminBirth());
+        repoAdmin.setRepository(respositoryService.findById(repoAdminDTO.getRepoId()));
 
         System.out.println(repoAdmin);
 

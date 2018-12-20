@@ -3,6 +3,7 @@ package com.zhannicholas.cpwms.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ public class Respository {
     private String repoArea;
     private String repoDesc;
     private RepoAdmin repoAdmin;
+    private List<Storage> storageList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,5 +105,15 @@ public class Respository {
 
     public void setRepoAdmin(RepoAdmin repoAdmin) {
         this.repoAdmin = repoAdmin;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "respository")
+    public List<Storage> getStorageList() {
+        return storageList;
+    }
+
+    public void setStorageList(List<Storage> storageList) {
+        this.storageList = storageList;
     }
 }

@@ -3,10 +3,10 @@
 
 <script>
     // 出入库记录查询参数
-    search_type = 'none'
-    search_repositoryID = ''
-    search_start_date = null
-    search_end_date = null
+    var search_type = 'none';
+    var search_repositoryID = '';
+    var search_start_date = null;
+    var search_end_date = null;
 
     $(function(){
         repositoryOptionInit();
@@ -17,26 +17,26 @@
 
     // 仓库下拉框数据初始化
 	function repositoryOptionInit(){
-		$.ajax({
-			type : 'GET',
-			url : 'repositoryManage/getRepositoryList',
-			dataType : 'json',
-			contentType : 'application/json',
-			data:{
-				searchType : "searchAll",
-				keyWord : "",
-				offset : -1,
-				limit : -1
-			},
-			success : function(response){
-				$.each(response.rows,function(index,elem){
-					$('#search_repository_ID').append("<option value='" + elem.id + "'>" + elem.id +"号仓库</option>");
-				})
-			},
-			error : function(response){
-			}
-		});
-		//$('#search_repository_ID').append("<option value='all'>所有仓库</option>");
+        $.ajax({
+            type : 'GET',
+            url : 'repositoryManage/getRepositoryList',
+            dataType : 'json',
+            contentType : 'application/json',
+            data:{
+                searchType : "searchAll",
+                keyWord : "",
+                offset : -1,
+                limit : -1
+            },
+            success : function(response){
+                //组装option
+                $.each(response.rows,function(index,elem){
+                    $('#search_input_repository').append("<option value='" + elem.repoId + "'>" + elem.repoId +"号仓库</option>");
+                })
+            },
+            error : function(response){
+            }
+        });
 	}
 
 	// 日期选择器初始化
@@ -62,7 +62,7 @@
 						{
 							columns : [
 									{
-										field : 'recordID',
+										field : 'recordId',
 										title : '记录ID'
 									//sortable: true
 									},
@@ -71,17 +71,17 @@
 										title : '供应商/客户名称'
 									},
 									{
-										field : 'goodsName',
+										field : 'partsName',
 										title : '商品名称'
 									},
 									{
-										field : 'repositoryID',
+										field : 'repoId',
 										title : '出/入库仓库ID',
 										//visible : false
 									},
 									{
 										field : 'number',
-										title : '数量',
+										title : '数量'
 										//visible : false
 									},
 									{
@@ -89,7 +89,7 @@
 										title : '日期'
 									},
 									{
-										field : 'personInCharge',
+										field : 'person',
 										title : '经手人'
 									},
 									{
@@ -99,7 +99,16 @@
 									 ],
 							url : 'stockRecordManage/searchStockRecord',
 							method : 'GET',
-							queryParams : queryParams,
+							queryParams : function (params) {   // 分页查询参数
+                                return {
+                                    limit : params.limit,
+                                    offset : params.offset,
+                                    searchType : search_type,
+                                    repoId : search_repositoryID,
+                                    startDate : search_start_date,
+                                    endDate : search_end_date
+                                }
+                            },
 							sidePagination : "server",
 							dataType : 'json',
 							pagination : true,
@@ -115,19 +124,6 @@
 		$('#stockRecords').bootstrapTable('refresh', {
 			query : {}
 		});
-	}
-
-	// 分页查询参数
-	function queryParams(params) {
-		var temp = {
-			limit : params.limit,
-			offset : params.offset,
-			searchType : search_type,
-			repositoryID : search_repositoryID,
-			startDate : search_start_date,
-			endDate : search_end_date
-		}
-		return temp;
 	}
 
 	// 查询操作

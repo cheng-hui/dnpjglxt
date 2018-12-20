@@ -6,7 +6,7 @@ import com.zhannicholas.cpwms.domain.repository.RepoAdminRepository;
 import com.zhannicholas.cpwms.domain.repository.RepoRepository;
 import com.zhannicholas.cpwms.service.RepoAdminService;
 import com.zhannicholas.cpwms.util.ToMapUtil;
-import com.zhannicholas.cpwms.web.vo.RepoAdminVo;
+import com.zhannicholas.cpwms.domain.dto.RepoAdminDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,14 +50,14 @@ public class RepoAdminServiceImpl implements RepoAdminService {
     @Override
     public Map<String, Object> findByRepoAdminId(int repoAdminId) {
         RepoAdmin repoAdmin = repoAdminRepository.findByRepoAdminId(repoAdminId);
-        return ToMapUtil.fromAInstance(repoAdmin2RepoAdminVo(repoAdmin));
+        return ToMapUtil.fromAInstance(repoAdmin2RepoAdminDTO(repoAdmin));
     }
 
     @Override
     public Map<String, Object> findByRepoId(int repoId) {
         Respository respository = repoRepository.findByRepoId(repoId);
         RepoAdmin repoAdmin = repoAdminRepository.findByRepository(respository);
-        return ToMapUtil.fromAInstance(repoAdmin2RepoAdminVo(repoAdmin));
+        return ToMapUtil.fromAInstance(repoAdmin2RepoAdminDTO(repoAdmin));
     }
 
     @Override
@@ -105,32 +105,32 @@ public class RepoAdminServiceImpl implements RepoAdminService {
      * @param repoAdmin 仓库管理员对象
      * @return  仓库管理员对应的视图对象
      */
-    private RepoAdminVo repoAdmin2RepoAdminVo(RepoAdmin repoAdmin){
-        RepoAdminVo repoAdminVo = new RepoAdminVo();
-        repoAdminVo.setRepoAdminId(repoAdmin.getRepoAdminId());
-        repoAdminVo.setRepoAdminName(repoAdmin.getRepoAdminName());
-        repoAdminVo.setRepoAdminSex(repoAdmin.getRepoAdminSex());
-        repoAdminVo.setRepoAdminTel(repoAdmin.getRepoAdminTel());
-        repoAdminVo.setRepoAdminAddress(repoAdmin.getRepoAdminAddress());
-        repoAdminVo.setRepoAdminBirth(repoAdmin.getRepoAdminBirth());
+    private RepoAdminDTO repoAdmin2RepoAdminDTO(RepoAdmin repoAdmin){
+        RepoAdminDTO repoAdminDTO = new RepoAdminDTO();
+        repoAdminDTO.setRepoAdminId(repoAdmin.getRepoAdminId());
+        repoAdminDTO.setRepoAdminName(repoAdmin.getRepoAdminName());
+        repoAdminDTO.setRepoAdminSex(repoAdmin.getRepoAdminSex());
+        repoAdminDTO.setRepoAdminTel(repoAdmin.getRepoAdminTel());
+        repoAdminDTO.setRepoAdminAddress(repoAdmin.getRepoAdminAddress());
+        repoAdminDTO.setRepoAdminBirth(repoAdmin.getRepoAdminBirth());
         Respository respository = repoAdmin.getRepository();
         if(respository != null){
-            repoAdminVo.setRepoId(respository.getRepoId());
+            repoAdminDTO.setRepoId(respository.getRepoId());
         }
-        return repoAdminVo;
+        return repoAdminDTO;
     }
 
     private Map<String, Object> page2Map(Page<RepoAdmin> repoAdminPage){
         List<RepoAdmin> repoAdminList = repoAdminPage.getContent();
-        List<RepoAdminVo> repoAdminVoList = new ArrayList<>();
+        List<RepoAdminDTO> repoAdminDTOList = new ArrayList<>();
         for(RepoAdmin repoAdmin: repoAdminList){
-            repoAdminVoList.add(repoAdmin2RepoAdminVo(repoAdmin));
+            repoAdminDTOList.add(repoAdmin2RepoAdminDTO(repoAdmin));
         }
 
         // 初始化结果集
         Map<String, Object> resultSet = new HashMap<>();
-        resultSet.put("rows", repoAdminVoList);
-        resultSet.put("total", repoAdminVoList.size());
+        resultSet.put("rows", repoAdminDTOList);
+        resultSet.put("total", repoAdminDTOList.size());
         return resultSet;
     }
 }
