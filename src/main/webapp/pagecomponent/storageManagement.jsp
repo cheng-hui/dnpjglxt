@@ -68,7 +68,6 @@
 			error : function(response){
 			}
 		});
-		//$('#search_input_repository').append("<option value='all'>请选择仓库</option>");
 	}
 
 	// 搜索动作

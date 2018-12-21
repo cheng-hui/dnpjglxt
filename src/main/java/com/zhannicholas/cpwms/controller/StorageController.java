@@ -1,7 +1,6 @@
-package com.zhannicholas.cpwms.web.controller;
+package com.zhannicholas.cpwms.controller;
 
-import com.zhannicholas.cpwms.service.RecordInService;
-import com.zhannicholas.cpwms.service.RecordOutService;
+import com.zhannicholas.cpwms.service.RecordService;
 import com.zhannicholas.cpwms.service.RespositoryService;
 import com.zhannicholas.cpwms.service.StorageService;
 import com.zhannicholas.cpwms.util.Constants;
@@ -26,15 +25,13 @@ import static com.zhannicholas.cpwms.util.Constants.*;
 @RequestMapping("storageManage")
 public class StorageController {
     private final StorageService storageService;
-    private final RecordInService recordInService;
-    private final RecordOutService recordOutService;
     private final RespositoryService respositoryService;
+    private final RecordService recordService;
 
     @Autowired
-    public StorageController(StorageService storageService, RecordInService recordInService, RecordOutService recordOutService, RespositoryService respositoryService) {
+    public StorageController(StorageService storageService, RecordService recordService, RespositoryService respositoryService) {
         this.storageService = storageService;
-        this.recordInService = recordInService;
-        this.recordOutService = recordOutService;
+        this.recordService = recordService;
         this.respositoryService = respositoryService;
     }
 
@@ -68,7 +65,7 @@ public class StorageController {
         person = "詹伟伟";
         // ***************************************************************
 
-        String result = recordInService.saveRecord(supplierId, partsId, number, person, repoId) ?
+        String result = recordService.saveInRecord(supplierId, partsId, number, person, repoId) ?
                 Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         System.out.println("入库结果：" + result);
         return ToMapUtil.fromString(result);
@@ -95,7 +92,7 @@ public class StorageController {
         person = "詹伟伟";
         // ***************************************************************
 
-        String result = recordOutService.saveRecord(customerId, partsId, number, person, repoId) ?
+        String result = recordService.saveOutRecord(customerId, partsId, number, person, repoId) ?
                 Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         System.out.println("出库结果：" + result);
         return ToMapUtil.fromString(result);

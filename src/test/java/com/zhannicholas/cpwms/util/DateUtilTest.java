@@ -8,6 +8,6 @@ public class DateUtilTest {
 
     @Test
     public void fromUtilDate() {
-        System.out.println(DateUtil.fromUtilDate());
+        System.out.println(DateUtil.fromUtilDate(new java.util.Date()));
     }
 }

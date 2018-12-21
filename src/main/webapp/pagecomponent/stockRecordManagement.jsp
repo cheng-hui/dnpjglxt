@@ -1,5 +1,5 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"-->
-<!--pageEncoding="UTF-8"%>-->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 
 <script>
     // 出入库记录查询参数
@@ -15,8 +15,8 @@
         searchAction();
     })
 
-    // 仓库下拉框数据初始化
-	function repositoryOptionInit(){
+    // 仓库下拉列表初始化
+    function repositoryOptionInit(){
         $.ajax({
             type : 'GET',
             url : 'repositoryManage/getRepositoryList',
@@ -31,13 +31,14 @@
             success : function(response){
                 //组装option
                 $.each(response.rows,function(index,elem){
-                    $('#search_input_repository').append("<option value='" + elem.repoId + "'>" + elem.repoId +"号仓库</option>");
-                })
+                    $('#search_repository_ID').append("<option value='" + elem.repoId + "'>" + elem.repoId +"号仓库</option>");
+                });
+                $('#search_repository_ID').append("<option value='-1'>所有仓库</option>");
             },
             error : function(response){
             }
         });
-	}
+    }
 
 	// 日期选择器初始化
 	function datePickerInit(){
@@ -62,7 +63,7 @@
 						{
 							columns : [
 									{
-										field : 'recordId',
+										field : 'id',
 										title : '记录ID'
 									//sortable: true
 									},
@@ -97,7 +98,7 @@
 										title : '记录类型'
 									}
 									 ],
-							url : 'stockRecordManage/searchStockRecord',
+							url : 'recordManage/searchRecord',
 							method : 'GET',
 							queryParams : function (params) {   // 分页查询参数
                                 return {
@@ -109,13 +110,15 @@
                                     endDate : search_end_date
                                 }
                             },
-							sidePagination : "server",
-							dataType : 'json',
-							pagination : true,
-							pageNumber : 1,
-							pageSize : 5,
-							pageList : [ 5, 10, 25, 50, 100 ],
-							clickToSelect : true
+                            sidePagination : "server",	// 服务端分页
+                            queryParamsType : "limit",
+                            dataType : 'json',
+                            pagination : true,
+                            pageNumber : 1,
+                            pageSize : 5,
+                            pageList : [ 5, 10, 25, 50, 100 ],  // 可选的每页数据
+                            paginationPreText: ' 上一页',
+                            paginationNextText: '下一页'
 						});
 	}
 
@@ -133,6 +136,7 @@
 	        search_type = $('#search_type').val();
 	        search_start_date = $('#search_start_date').val();
 	        search_end_date = $('#search_end_date').val();
+	        alert("repoId: " + search_repositoryID + "\nsearchType: " + search_type + "\nstart: " + search_start_date + "\nend: " + search_end_date)
 	        tableRefresh();
 	    })
 	}
@@ -149,7 +153,7 @@
                     <div class="form-group">
                         <label class="form-label">仓库编号：</label>
                         <select class="form-control" id="search_repository_ID">
-                            <option value="">请选择仓库</option>
+                            <%--<option value="">请选择仓库</option>--%>
                         </select>
                     </div>
                 </form>
@@ -158,7 +162,7 @@
                     <form action="" class="form-inline">
                         <label class="form-label">记录过滤：</label>
                         <select name="" id="search_type" class="form-control">
-                            <option value="all">显示所有</option>
+                            <option value="searchAll">显示所有</option>
                             <option value="stockInOnly">仅显示入库记录</option>
                             <option value="stockOutOnly">仅显示出库记录</option>
                         </select>

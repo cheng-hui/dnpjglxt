@@ -1,6 +1,6 @@
 package com.zhannicholas.cpwms.domain.dto;
 
-// 仓库视图对象
+// 仓库
 public class RepoDTO {
     private int repoId;
     private String repoAddress;

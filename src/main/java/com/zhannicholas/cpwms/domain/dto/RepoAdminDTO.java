@@ -2,7 +2,7 @@ package com.zhannicholas.cpwms.domain.dto;
 
 import java.sql.Date;
 
-// 仓库管理员视图对象
+// 仓库管理员
 public class RepoAdminDTO {
     private int repoAdminId;
     private String repoAdminName;

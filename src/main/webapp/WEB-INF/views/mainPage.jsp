@@ -16,6 +16,49 @@ pageEncoding="UTF-8"%>
           href="${pageContext.request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/css/mainPage.css">
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrap-table.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/jquery.md5.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/mainPage.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            signOut();
+        });
+
+        // 注销登陆
+        function signOut() {
+            $("#signOut").click(function() {
+                $.ajax({
+                    type : "POST",
+                    url : "account/signOut",
+                    dataType : "json",
+                    contentType : "application/json",
+                    success:function(response){
+                        //刷新
+                        window.location.reload(true);
+                    },error:function(response){
+
+                    }
+                })
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -36,17 +79,17 @@ pageEncoding="UTF-8"%>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
-                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:${sessionScope.username}</span>
+                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:${sessionScope.userName}</span>
                             <!--小三角-->
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-通过session获取的name的值-->
-                            <li>
+                            <%--<li>
                                 <a href="#" id="editInfo"> <span
-                                        class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;修改个人信息</a></li>
+                                        class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;修改个人信息</a>
+                            </li>--%>
                             <li>
-                                <a href="javascript:void(0)" id="signOut"> <span
+                                <a href="javascript:void(0)" id="signOut"><span
                                         class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销登录
                                 </a>
                             </li>
@@ -94,7 +137,7 @@ pageEncoding="UTF-8"%>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id=""
                                        class="menu_item"
-                                       name="pagecomponent/stockRecordManagement.html">出入库记录</a>
+                                       name="pagecomponent/stockRecordManagement.jsp">出入库记录</a>
                                 </li>
                             </ul>
                         </div>
@@ -198,14 +241,14 @@ pageEncoding="UTF-8"%>
                                        name="pagecomponent/passwordModification.jsp">更改密码</a>
                                 </li>
                                 <%--若为超级管理员--%>
-                                <li class="list-group-item">
+                                <%--<li class="list-group-item">
                                     <a href="javascript:void(0)" id=""
                                        class="menu_item" name="pagecomponent/userOperationRecorderManagement.html">系统日志</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id=""
                                        class="menu_item" name="pagecomponent/accessRecordManagement.html">登陆日志</a>
-                                </li>
+                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -225,28 +268,5 @@ pageEncoding="UTF-8"%>
 </div>
 
 <span id="requestPrefix" class="hide">${sessionScope.requestPrefix}</span>
-
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/jquery-2.2.3.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrapValidator.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrap-table.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrap-table-zh-CN.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/jquery.md5.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/mainPage.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
 </html>

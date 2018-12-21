@@ -1,4 +1,4 @@
-package com.zhannicholas.cpwms.web.controller;
+package com.zhannicholas.cpwms.controller;
 
 import com.zhannicholas.cpwms.domain.model.Respository;
 import com.zhannicholas.cpwms.service.RespositoryService;

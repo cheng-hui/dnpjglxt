@@ -5,7 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.sql.Date;
 
 import static org.junit.Assert.*;
 
@@ -16,8 +19,25 @@ public class RecordInRepositoryTest {
     private RecordInRepository recordInRepository;
 
     @Test
-    public void testSave(){
-        recordInRepository.saveRecord(1019, 130, 1001, DateUtil.fromUtilDate(), "詹伟伟", 1006);
+    public void findUsingRepoIdAndDate(){
+        System.out.println(
+                recordInRepository.findUsingRepoIdAndDate(
+                        1004,
+                        DateUtil.fromDateStr("2016-12-30", false),
+                        DateUtil.fromDateStr("2018-12-26", true),
+                        PageRequest.of(0, 5)
+                ).getContent()
+        );
     }
 
+    @Test
+    public void findUsingDate(){
+        System.out.println(
+                recordInRepository.findUsingDate(
+                        DateUtil.fromDateStr("2016-12-30", false),
+                        DateUtil.fromDateStr("2018-12-26", true),
+                        PageRequest.of(0, 5)
+                ).getContent()
+        );
+    }
 }

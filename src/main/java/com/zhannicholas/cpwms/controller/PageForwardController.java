@@ -1,11 +1,12 @@
-package com.zhannicholas.cpwms.web.controller;
+package com.zhannicholas.cpwms.controller;
 
-import com.zhannicholas.cpwms.util.AccountStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import static com.zhannicholas.cpwms.util.Constants.*;
 
 @Controller
 @RequestMapping("/")
@@ -17,13 +18,11 @@ public class PageForwardController {
 
     @RequestMapping("mainPage")
     public String showMainPage(HttpServletRequest request){
-        return "mainPage";
-        // 为了方便测试，先注释登录代码
-//        HttpSession session = request.getSession();
-//        if(session.getAttribute("userID") != null &&
-//            session.getAttribute("account_status").equals(AccountStatus.SIGN_IN)){
-//            return "mainPage";
-//        }
-//        return "login";
+        HttpSession session = request.getSession();
+        if(session.getAttribute(USER_ID) != null &&
+            session.getAttribute(ACCOUNT_STATUS).equals(SIGN_IN)){
+            return "mainPage";
+        }
+        return "login";
     }
 }

@@ -3,6 +3,7 @@ package com.zhannicholas.cpwms.domain.dto;
 
 import java.io.Serializable;
 
+// 库存
 public class StorageDTO implements Serializable {
     private Integer partsId;
     private String partsName;

@@ -1,7 +1,7 @@
-package com.zhannicholas.cpwms.web.controller;
+package com.zhannicholas.cpwms.controller;
 
-import com.zhannicholas.cpwms.domain.model.Customer;
-import com.zhannicholas.cpwms.service.CustomerService;
+import com.zhannicholas.cpwms.domain.model.Parts;
+import com.zhannicholas.cpwms.service.PartsService;
 import com.zhannicholas.cpwms.util.Constants;
 import com.zhannicholas.cpwms.util.ToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import java.util.Map;
 import static com.zhannicholas.cpwms.util.Constants.*;
 
 @Controller
-@RequestMapping("/customerManage")
-public class CustomerController {
-    private final CustomerService customerService;
+@RequestMapping("/partsManage")
+public class PartsController {
+    private final PartsService partsService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public PartsController(PartsService partsService) {
+        this.partsService = partsService;
     }
 
     /**
@@ -39,22 +39,22 @@ public class CustomerController {
         }
         switch (searchType){
             case SEARCH_BY_ID:
-                return customerService.findOne(Integer.parseInt(keyWord));
+                return partsService.findOne(Integer.parseInt(keyWord));
             case SEARCH_ALL:
-                return customerService.findAll(pageable);
+                return partsService.findAll(pageable);
             case SEARCH_BY_NAME:
-                return customerService.findByCustomerNameContaining(keyWord, pageable);
+                return partsService.findByPartsNameContaining(keyWord, pageable);
             default:
-                return customerService.findAll(pageable);
+                return partsService.findAll(pageable);
         }
     }
 
-    @RequestMapping(value = "getCustomerList", method = RequestMethod.GET)
+    @RequestMapping(value = "getPartsList", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findAllCustomer(@RequestParam("searchType") String searchType,
-                                            @RequestParam(value = "offset", defaultValue = "0") int offset,
-                                            @RequestParam(value = "limit", defaultValue = "5") int limit,
-                                            @RequestParam("keyWord") String keyWord){
+    public Map<String, Object> findAllParts(@RequestParam("searchType") String searchType,
+                                    @RequestParam(value = "offset", defaultValue = "0") int offset,
+                                    @RequestParam(value = "limit", defaultValue = "5") int limit,
+                                    @RequestParam("keyWord") String keyWord){
         System.out.println("searchType: " + searchType +
                 "\noffset: " + offset +
                 "\nlimit: " + limit +
@@ -66,28 +66,29 @@ public class CustomerController {
     }
 
     /**
-     *  更新或者插入供应商信息
-     * @param customer 修改后的供应商或者新的供应商
+     *  更新或者插入配件信息
+     * @param parts 修改后的配件或者新的配件
      * @return 返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "updateCustomer", method = RequestMethod.POST)
+    @RequestMapping(value = "updateParts", method = RequestMethod.POST)
     @ResponseBody   /** 必须得返回json格式的数据，因为前端要的就是json数据 */
-    public Map<String, Object> updateCustomer(@RequestBody Customer customer){
+    public Map<String, Object> updateParts(@RequestBody Parts parts){
+        System.out.println(parts);
 
-        String result =customerService.save(customer) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
+        String result =partsService.save(parts) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 
     /**
-     * 删除供应商
-     * @param supplierId   供应商Id
+     * 删除配件
+     * @param partsId   配件Id
      * @return  返回一个map，其中：key 为 result表示操作的结果，包括：success 与 error
      */
-    @RequestMapping(value = "deleteCustomer/{customerId}", method = RequestMethod.POST)
+    @RequestMapping(value = "deleteParts/{partsId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> deleteCustomer(@PathVariable("customerId") int supplierId){
-        System.out.println("删除：" + supplierId);
-        String result =customerService.delete(supplierId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
+    public Map<String, Object> deleteParts(@PathVariable("partsId") int partsId){
+        System.out.println(partsId);
+        String result =partsService.delete(partsId) ? Constants.RESULT_SUCCESS : Constants.RESULT_ERROR;
         return ToMapUtil.fromString(result);
     }
 }
