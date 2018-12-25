@@ -42,7 +42,7 @@ function quickAccessInit(){
 										src="media/icons/stock_in-512.png" alt="配件入库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
-											<h3 class="title">货物入库</h3>
+											<h3 class="title">配件入库</h3>
 										</div>
 									</a>
 								</div>
@@ -52,7 +52,7 @@ function quickAccessInit(){
 										src="media/icons/stock_out-512.png" alt="配件出库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
-											<h3 class="title">货物出库</h3>
+											<h3 class="title">配件出库</h3>
 										</div>
 									</a>
 								</div>
