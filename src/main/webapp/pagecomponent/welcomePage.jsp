@@ -39,7 +39,7 @@ function quickAccessInit(){
 								<!--货物入库div-->
 								<div class="col-md-4 col-sm-4">
 									<a href="javascript:void(0)" class="thumbnail shortcut"> <img
-										src="media/icons/stock_in-512.png" alt="货物入库"
+										src="media/icons/stock_in-512.png" alt="配件入库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
 											<h3 class="title">货物入库</h3>
@@ -49,7 +49,7 @@ function quickAccessInit(){
 								<!--货物出库div-->
 								<div class="col-md-4 col-sm-4">
 									<a href="javascript:void(0)" class="thumbnail shortcut"> <img
-										src="media/icons/stock_out-512.png" alt="货物出库"
+										src="media/icons/stock_out-512.png" alt="配件出库"
 										class="img-rounded link" style="width: 150px; height: 150px;">
 										<div class="caption">
 											<h3 class="title">货物出库</h3>
