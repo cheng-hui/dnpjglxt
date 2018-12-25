@@ -132,7 +132,7 @@ pageEncoding="UTF-8"%>
                                 <!--若为超级管理员-->
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id="" class="menu_item"
-                                       name="pagecomponent/storageManagement.jsp">库存查询</a>
+                                       name="pagecomponent/storageManagement.jsp">库存信息管理</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)" id=""

@@ -31,11 +31,20 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public boolean save(Supplier supplier) {
-        if(isValidSupplier(supplier) &&
-                countSupplierName(supplier.getSupplierName()) < 1){
-            supplierRepository.save(supplier);
-            return true;
+        if(isValidSupplier(supplier)){
+            // 修改
+            if(new Integer(supplier.getSupplierId()) != null && isValidSupplierId(supplier.getSupplierId())){
+                supplierRepository.save(supplier);
+                return true;
+            }
+            else{   // 新增
+                if(countSupplierName(supplier.getSupplierName()) < 1){
+                    supplierRepository.save(supplier);
+                    return true;
+                }
+            }
         }
+        
         return false;
     }
 

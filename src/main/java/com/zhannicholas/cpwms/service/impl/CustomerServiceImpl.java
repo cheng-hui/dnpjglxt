@@ -31,10 +31,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean save(Customer customer) {
-        if(isValidCustomer(customer) &&
-                countCustomerName(customer.getCustomerName()) < 1){
-            customerRepository.save(customer);
-            return true;
+        if(isValidCustomer(customer)){
+            // 修改
+            if(new Integer(customer.getCustomerId()) != null && isValidCustomerId(customer.getCustomerId())){
+                customerRepository.save(customer);
+                return true;
+            }
+            else{   // 新增
+                if(countCustomerName(customer.getCustomerName()) < 1){
+                    customerRepository.save(customer);
+                    return true;
+                }
+            }
+
         }
         return false;
     }

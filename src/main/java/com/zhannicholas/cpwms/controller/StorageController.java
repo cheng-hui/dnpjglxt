@@ -59,10 +59,9 @@ public class StorageController {
         HttpSession session =request.getSession();
         String person = (String) session.getAttribute("userName");
 
-        // todo 替换person
 
         // *************************测试使用*******************************
-        person = "詹伟伟";
+        //person = "詹伟伟";
         // ***************************************************************
 
         String result = recordService.saveInRecord(supplierId, partsId, number, person, repoId) ?
@@ -86,10 +85,9 @@ public class StorageController {
         HttpSession session =request.getSession();
         String person = (String) session.getAttribute("userName");
 
-        // todo 替换person
 
         // *************************测试使用*******************************
-        person = "詹伟伟";
+        //person = "詹伟伟";
         // ***************************************************************
 
         String result = recordService.saveOutRecord(customerId, partsId, number, person, repoId) ?

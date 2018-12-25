@@ -136,7 +136,6 @@ pageEncoding="UTF-8"%>
 	        search_type = $('#search_type').val();
 	        search_start_date = $('#search_start_date').val();
 	        search_end_date = $('#search_end_date').val();
-	        alert("repoId: " + search_repositoryID + "\nsearchType: " + search_type + "\nstart: " + search_start_date + "\nend: " + search_end_date)
 	        tableRefresh();
 	    })
 	}
