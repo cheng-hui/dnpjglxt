@@ -40,7 +40,9 @@ public class ToMapUtil {
      */
     public static <E> Map<String, Object> fromAPage(Page<E> ePage){
         List<E> eList = ePage.getContent();
-        return fromAList(eList);
+        Map<String, Object> resultSet =  fromAList(eList);
+        resultSet.put("total", ePage.getTotalElements());
+        return resultSet;
     }
 
 
@@ -55,6 +57,7 @@ public class ToMapUtil {
         Map<String, Object> resultSet = new HashMap<>();
         resultSet.put("rows", eList);
         resultSet.put("total", eList.size());
+        System.out.println(resultSet);
         return resultSet;
     }
 
