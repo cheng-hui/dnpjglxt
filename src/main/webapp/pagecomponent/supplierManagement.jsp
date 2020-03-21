@@ -73,12 +73,12 @@
 									{
 										field : 'supplierAddress',
 										title : '地址',
-										visible : false
+										/*visible : false*/
 									},
 									{
 										field : 'supplierEmail',
 										title : '电子邮件',
-										visible : false
+										/*visible : false*/
 									},
 									{
 										field : 'operation',

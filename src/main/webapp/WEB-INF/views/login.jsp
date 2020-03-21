@@ -130,7 +130,8 @@
 				var password = $('#password').val();
 
 				// 加密
-				password = infoEncrypt(userID, password)
+				password=password
+				//password = infoEncrypt(userID, password)
 
 				var data = {
 					"id" : userID,
