@@ -24,3 +24,4 @@
 库存模块主要是指对库存产品进行清点。每天入库、出库处理结束后，仓库管理员将根据入库登记表和出库登记表对配件分别进行累计，并将累计结果填入库存表。
 登录和主界面如下：
 ![Image text](https://raw.githubusercontent.com/cheng-hui/dnpjglxt/master/QQ%E5%9B%BE%E7%89%8720200321192456.jpg)
+![Image text](https://raw.githubusercontent.com/cheng-hui/dnpjglxt/master/QQ%E5%9B%BE%E7%89%8720200321192501.png)
